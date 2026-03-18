@@ -20,6 +20,9 @@
     <div class="blob blob-4"></div>
   </div>
 
+  <!-- Globe of dots background -->
+  <canvas id="hero-globe" class="hero-globe" aria-hidden="true"></canvas>
+
   <!-- Horizontal scan line effect -->
   <div class="hero-scanlines" aria-hidden="true"></div>
 
@@ -34,8 +37,27 @@
 
       <!-- Main headline — split into char spans for GSAP stagger -->
       <!-- Lines are split manually so each word group can animate independently -->
-      <h1 class="hero-headline" aria-label="Built for W&S.">
+      <h1 class="hero-headline" aria-label="Building for you. Built for W&amp;S.">
         <span class="headline-line">
+          <span class="char-wrap"><span class="char">B</span></span><!--
+          --><span class="char-wrap"><span class="char">u</span></span><!--
+          --><span class="char-wrap"><span class="char">i</span></span><!--
+          --><span class="char-wrap"><span class="char">l</span></span><!--
+          --><span class="char-wrap"><span class="char">d</span></span><!--
+          --><span class="char-wrap"><span class="char">i</span></span><!--
+          --><span class="char-wrap"><span class="char">n</span></span><!--
+          --><span class="char-wrap"><span class="char">g</span></span><!--
+          --><span class="char-wrap"><span class="char">&nbsp;</span></span><!--
+          --><span class="char-wrap"><span class="char">f</span></span><!--
+          --><span class="char-wrap"><span class="char">o</span></span><!--
+          --><span class="char-wrap"><span class="char">r</span></span><!--
+          --><span class="char-wrap"><span class="char">&nbsp;</span></span><!--
+          --><span class="char-wrap"><span class="char">y</span></span><!--
+          --><span class="char-wrap"><span class="char">o</span></span><!--
+          --><span class="char-wrap"><span class="char">u</span></span><!--
+          --><span class="char-wrap"><span class="char">.</span></span>
+        </span>
+        <span class="headline-line headline-line--accent">
           <span class="char-wrap"><span class="char">B</span></span><!--
           --><span class="char-wrap"><span class="char">u</span></span><!--
           --><span class="char-wrap"><span class="char">i</span></span><!--
@@ -44,19 +66,11 @@
           --><span class="char-wrap"><span class="char">&nbsp;</span></span><!--
           --><span class="char-wrap"><span class="char">f</span></span><!--
           --><span class="char-wrap"><span class="char">o</span></span><!--
-          --><span class="char-wrap"><span class="char">r</span></span>
-        </span>
-        <span class="headline-line headline-line--accent">
-          <span class="char-wrap"><span class="char">t</span></span><!--
-          --><span class="char-wrap"><span class="char">h</span></span><!--
-          --><span class="char-wrap"><span class="char">e</span></span><!--
+          --><span class="char-wrap"><span class="char">r</span></span><!--
           --><span class="char-wrap"><span class="char">&nbsp;</span></span><!--
-          --><span class="char-wrap"><span class="char">i</span></span><!--
-          --><span class="char-wrap"><span class="char">n</span></span><!--
-          --><span class="char-wrap"><span class="char">s</span></span><!--
-          --><span class="char-wrap"><span class="char">i</span></span><!--
-          --><span class="char-wrap"><span class="char">d</span></span><!--
-          --><span class="char-wrap"><span class="char">e</span></span><!--
+          --><span class="char-wrap"><span class="char">W</span></span><!--
+          --><span class="char-wrap"><span class="char">&amp;</span></span><!--
+          --><span class="char-wrap"><span class="char">S</span></span><!--
           --><span class="char-wrap"><span class="char">.</span></span>
         </span>
       </h1>
@@ -165,6 +179,16 @@
     66%       { transform: translate(25px, -20px) scale(1.04); }
   }
 
+  /* ── Globe canvas ── */
+  .hero-globe {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
   /* ── Scanlines ── */
   .hero-scanlines {
     position: absolute;
@@ -187,11 +211,11 @@
   }
 
   .hero-headline {
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: clamp(3.5rem, 9vw, 8.5rem);
-    line-height: 0.95;
-    letter-spacing: -0.02em;
+    font-family: var(--font-roboto);
+    font-weight: 700;
+    font-size: clamp(2.2rem, 5vw, 5rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
     color: var(--c-white);
     margin-bottom: 2.5rem;
     display: block;
@@ -201,8 +225,9 @@
     display: block;
   }
 
-  .headline-line--accent {
-    /* Gradient text on the second line */
+  /* Gradient applied directly to .char spans so overflow:hidden on
+     .char-wrap doesn't clip the parent's background-clip:text */
+  .headline-line--accent .char {
     background: linear-gradient(
       135deg,
       var(--c-white) 0%,

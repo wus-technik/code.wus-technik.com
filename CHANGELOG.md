@@ -6,6 +6,37 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.2.0] — 2026-03-18
+
+### Added
+
+- **Globe background** (`src/scripts/globe.js`) — 520-dot Canvas globe in the hero section using Fibonacci-sphere distribution; slow Y-axis rotation with fixed X-tilt; per-dot phase-shifted pulse animation; depth-based opacity (back hemisphere invisible); violet→green colour gradient with white flash at pulse peaks; ~8% randomly selected "bright" feature dots; pauses via `IntersectionObserver` when hero is off-screen
+- **Section navigation** (`src/components/SectionNav.astro`) — fixed left-side vertical indicator with one dot per section; active dot scales and glows in violet; labels fade in on hover; clicking any dot smooth-scrolls to that section via shared `goToSection()` export
+- **Back-to-top button** (`src/components/BackToTop.astro`) — fixed bottom-right button; fades in after scrolling past 80% of the hero; glass-morphism background with violet border on hover; scrolls back to `#hero` on click
+- **Custom scroll controller** (`src/scripts/scroll.js`) — replaces native scroll-snap with GSAP `ScrollToPlugin`-driven section navigation; `wheel` and `touch` events scroll exactly one section at a time; configurable duration (1.4 s) and easing (`power2.inOut`); lock buffer prevents skipping; exports `goToSection(index)` for use by `SectionNav`
+- `@fontsource/roboto` (300/400/700) added as self-hosted font dependency
+
+### Changed
+
+- **Hero headline** rewritten to "Building for you. / Built for W&S." — first line white, second line violet→green gradient applied directly to `.char` spans (fixes `overflow:hidden` clip on `.char-wrap` that previously hid the gradient); font changed from Syne to Roboto 700; size reduced to `clamp(2.2rem, 5vw, 5rem)`
+- **All section headings** now use Roboto — `--font-display` CSS variable reassigned from Syne to Roboto, propagating to every component that references it
+- **ConnectingThread** completely redesigned from a simple Bezier path to a PCB-style circuit-trace overlay:
+  - Vertical trunk runs down the left margin (x ≈ 31 px, aligned with `SectionNav` dots); dashed violet ghost line always visible; active trace draws violet→green with scroll scrub
+  - Per-section bus frames branch from the trunk to each card/tile: top horizontal bus → vertical drops → right-side vertical → vertical rises → bottom horizontal bus returning to trunk; right-angle paths with `stroke-linecap: square`
+  - Ghost frame (dim violet rails + drop lines) visible before animation; ghost junction pads mark trunk↔bus connection points
+  - Active frame animates in sequence when section enters viewport (top bus → drops → right side → rises → bottom bus)
+  - Square PCB pads at all card and trunk junction points
+  - Services framed in violet (`#9333ea`), How We Work in indigo (`#6366f1`), About in green (`#10b981`)
+- **CI workflow** — Node.js runtime bumped from 20 to 24 to resolve GitHub Actions deprecation warning
+- **Hero `aria-label`** updated to match new headline text
+
+### Fixed
+
+- Gradient text on second hero headline line was clipped by `overflow:hidden` on `.char-wrap`; fixed by applying `background-clip:text` directly to each `.char` span instead of the parent
+
+[Unreleased]: https://github.com/wus-technik/code.wus-technik.com/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/wus-technik/code.wus-technik.com/compare/v0.1.0...v0.2.0
+
 ## [0.1.0] — 2026-03-18
 
 ### Added
@@ -74,5 +105,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Copyright, Impressum, Datenschutz, Kontakt links
 - Large "WUS" watermark background text
 
-[Unreleased]: https://github.com/wus-technik/code.wus-technik.com/compare/v0.1.0...HEAD
 [0.1.0]: https://github.com/wus-technik/code.wus-technik.com/releases/tag/v0.1.0

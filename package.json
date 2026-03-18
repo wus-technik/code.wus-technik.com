@@ -1,7 +1,7 @@
 {
   "name": "code-wus-technik-com",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -10,9 +10,10 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^4.15.0",
-    "gsap": "^3.12.5",
+    "@fontsource/jetbrains-mono": "^5.1.0",
+    "@fontsource/roboto": "^5.2.10",
     "@fontsource/syne": "^5.1.0",
-    "@fontsource/jetbrains-mono": "^5.1.0"
+    "astro": "^4.15.0",
+    "gsap": "^3.12.5"
   }
 }

@@ -1,0 +1,164 @@
+---
+/**
+ * SectionNav.astro — Left-side vertical section indicator
+ *
+ * Fixed to the left edge, vertically centered.
+ * Each dot corresponds to a snap-section; clicking scrolls there.
+ * Active section dot is highlighted. Labels appear on hover.
+ */
+
+const sections = [
+  { id: 'hero',        label: 'Home'     },
+  { id: 'services',    label: 'Services' },
+  { id: 'how-we-work', label: 'Process'  },
+  { id: 'about',       label: 'About'    },
+  { id: 'footer',      label: 'Contact'  },
+];
+---
+
+<nav class="section-nav" aria-label="Section navigation">
+  <ul class="section-nav-list">
+    {sections.map((s, i) => (
+      <li class="section-nav-item">
+        <button
+          class="section-nav-btn"
+          data-target={s.id}
+          data-index={i}
+          aria-label={`Go to ${s.label}`}
+        >
+          <span class="section-nav-dot" aria-hidden="true"></span>
+          <span class="section-nav-label">{s.label}</span>
+        </button>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<style>
+  .section-nav {
+    position: fixed;
+    left: 1.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 500;
+  }
+
+  .section-nav-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+
+  .section-nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: inherit;
+  }
+
+  /* ── Dot ── */
+  .section-nav-dot {
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--c-dim);
+    transition:
+      background 300ms var(--ease-out),
+      transform  300ms var(--ease-out),
+      box-shadow 300ms var(--ease-out);
+    flex-shrink: 0;
+  }
+
+  .section-nav-btn:hover .section-nav-dot,
+  .section-nav-btn.active .section-nav-dot {
+    background: var(--c-violet-5);
+  }
+
+  .section-nav-btn.active .section-nav-dot {
+    transform: scale(1.6);
+    box-shadow: 0 0 8px rgba(168, 85, 247, 0.6);
+  }
+
+  /* ── Label ── */
+  .section-nav-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--c-muted);
+
+    opacity: 0;
+    transform: translateX(-4px);
+    transition:
+      opacity   200ms var(--ease-out),
+      transform 200ms var(--ease-out),
+      color     200ms;
+
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .section-nav-btn:hover .section-nav-label {
+    opacity: 1;
+    transform: translateX(0);
+    color: var(--c-white);
+  }
+
+  .section-nav-btn.active .section-nav-label {
+    opacity: 1;
+    transform: translateX(0);
+    color: var(--c-violet-5);
+  }
+
+  /* Hide on small screens */
+  @media (max-width: 640px) {
+    .section-nav {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  import { goToSection } from '../scripts/scroll.js';
+
+  const buttons = Array.from(
+    document.querySelectorAll<HTMLButtonElement>('.section-nav-btn')
+  );
+
+  // Click → scroll to section
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const index = parseInt(btn.dataset.index ?? '0', 10);
+      goToSection(index);
+    });
+  });
+
+  // Highlight active section on scroll
+  const snapSections = Array.from(document.querySelectorAll('.snap-section'));
+
+  function updateActive() {
+    const mid = window.scrollY + window.innerHeight * 0.5;
+    let nearest     = 0;
+    let nearestDist = Infinity;
+
+    snapSections.forEach((s, i) => {
+      const el   = s as HTMLElement;
+      const dist = Math.abs(el.offsetTop + el.offsetHeight * 0.5 - mid);
+      if (dist < nearestDist) { nearestDist = dist; nearest = i; }
+    });
+
+    buttons.forEach((btn, i) => {
+      btn.classList.toggle('active', i === nearest);
+    });
+  }
+
+  updateActive();
+  window.addEventListener('scroll', updateActive, { passive: true });
+</script>

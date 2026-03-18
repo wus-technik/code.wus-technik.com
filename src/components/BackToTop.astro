@@ -1,0 +1,92 @@
+---
+/**
+ * BackToTop.astro — Fixed back-to-top button
+ *
+ * Fades in after the hero section leaves the viewport.
+ * Clicking scrolls back to #hero smoothly.
+ */
+---
+
+<button
+  class="back-to-top"
+  id="back-to-top"
+  aria-label="Back to top"
+  title="Back to top"
+>
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+    <path
+      d="M7 11V3M3 7l4-4 4 4"
+      stroke="currentColor"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+</button>
+
+<style>
+  .back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1000;
+
+    width: 2.5rem;
+    height: 2.5rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(10, 10, 15, 0.85);
+    border: 1px solid var(--c-border-bright);
+    border-radius: 4px;
+    color: var(--c-muted);
+    cursor: pointer;
+
+    opacity: 0;
+    transform: translateY(6px);
+    pointer-events: none;
+    transition:
+      opacity 300ms var(--ease-out),
+      transform 300ms var(--ease-out),
+      border-color 200ms,
+      color 200ms;
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .back-to-top.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .back-to-top:hover {
+    border-color: var(--c-violet-4);
+    color: var(--c-violet-5);
+  }
+
+  .back-to-top:active {
+    transform: translateY(1px);
+  }
+</style>
+
+<script>
+  const btn  = document.getElementById('back-to-top') as HTMLButtonElement | null;
+  const hero = document.getElementById('hero');
+
+  if (btn && hero) {
+    // Show once the user has scrolled past 80% of the hero
+    const threshold = hero.offsetHeight * 0.8;
+
+    window.addEventListener('scroll', () => {
+      btn.classList.toggle('visible', window.scrollY > threshold);
+    }, { passive: true });
+
+    btn.addEventListener('click', () => {
+      hero.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+</script>

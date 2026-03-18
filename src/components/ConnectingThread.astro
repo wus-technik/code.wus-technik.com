@@ -36,18 +36,18 @@
       <stop offset="100%" stop-color="#10b981" stop-opacity="0.9" />
     </linearGradient>
 
-    <!-- Glow filter for the path -->
+    <!-- Glow filter for active traces -->
     <filter id="thread-glow" x="-200%" y="-200%" width="500%" height="500%">
-      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feGaussianBlur stdDeviation="2.5" result="blur" />
       <feMerge>
         <feMergeNode in="blur" />
         <feMergeNode in="SourceGraphic" />
       </feMerge>
     </filter>
 
-    <!-- Node pulse filter -->
-    <filter id="node-glow" x="-300%" y="-300%" width="700%" height="700%">
-      <feGaussianBlur stdDeviation="4" result="blur" />
+    <!-- Stronger glow for junction pads -->
+    <filter id="pad-glow" x="-400%" y="-400%" width="900%" height="900%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
       <feMerge>
         <feMergeNode in="blur" />
         <feMergeNode in="SourceGraphic" />
@@ -55,24 +55,7 @@
     </filter>
   </defs>
 
-  <!--
-    Main thread path — drawn by JS (src/scripts/thread.js).
-    stroke-dasharray and stroke-dashoffset are set via GSAP.
-  -->
-  <path
-    class="thread-path"
-    d=""
-    stroke="url(#thread-gradient)"
-    stroke-width="1.5"
-    fill="none"
-    stroke-linecap="round"
-    filter="url(#thread-glow)"
-  />
-
-  <!--
-    Node circles at each section anchor — appended by JS.
-    CSS class: .thread-node
-  -->
+  <!-- All paths and pads are built dynamically by src/scripts/thread.js -->
 </svg>
 
 <!-- Mobile fallback: static dotted vertical accent line -->
