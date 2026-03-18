@@ -1,0 +1,58 @@
+# ─────────────────────────────────────────────────────────
+# Deploy Astro site to GitHub Pages (gh-pages branch)
+#
+# Triggered on push to main or manual workflow_dispatch.
+# Uses JamesIves/github-pages-deploy-action to push the
+# built `dist/` directory to the `gh-pages` branch.
+#
+# Custom domain: code.wus-technik.com
+# The CNAME file is in public/ and is copied to dist/ by Astro.
+# ─────────────────────────────────────────────────────────
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    name: Build & Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Check out source
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Set up Node.js with npm cache
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # 3. Install all dependencies (including GSAP, @fontsource/*)
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. Build Astro static output into dist/
+      - name: Build Astro site
+        run: npm run build
+
+      # 5. Deploy dist/ to gh-pages branch
+      #    JamesIves/github-pages-deploy-action handles:
+      #    - creating the branch if it doesn't exist
+      #    - force-pushing the compiled output
+      #    - preserving CNAME for custom domain
+      - name: Deploy to gh-pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: dist
+          clean:  true

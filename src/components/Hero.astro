@@ -1,0 +1,234 @@
+---
+/**
+ * Hero.astro — Section 1 (100vh)
+ *
+ * - Animated mesh gradient background (CSS blob animation)
+ * - SVG noise grain overlay
+ * - Large display headline with per-character GSAP stagger
+ * - Subtitle + meta tag
+ * - Mouse parallax on background blobs (src/scripts/hero.js)
+ * - Scroll indicator
+ */
+---
+
+<section class="snap-section hero" id="hero" data-section="0">
+  <!-- Animated mesh gradient background -->
+  <div class="hero-bg" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+  </div>
+
+  <!-- Horizontal scan line effect -->
+  <div class="hero-scanlines" aria-hidden="true"></div>
+
+  <!-- Content -->
+  <div class="section-inner hero-inner">
+    <div class="hero-content">
+
+      <!-- Label / eyebrow -->
+      <div class="hero-meta label label--accent">
+        W&amp;S Technik GmbH &nbsp;/&nbsp; Internal Dev
+      </div>
+
+      <!-- Main headline — split into char spans for GSAP stagger -->
+      <!-- Lines are split manually so each word group can animate independently -->
+      <h1 class="hero-headline" aria-label="Built for the inside.">
+        <span class="headline-line">
+          <span class="char-wrap"><span class="char">B</span></span><!--
+          --><span class="char-wrap"><span class="char">u</span></span><!--
+          --><span class="char-wrap"><span class="char">i</span></span><!--
+          --><span class="char-wrap"><span class="char">l</span></span><!--
+          --><span class="char-wrap"><span class="char">t</span></span><!--
+          --><span class="char-wrap"><span class="char">&nbsp;</span></span><!--
+          --><span class="char-wrap"><span class="char">f</span></span><!--
+          --><span class="char-wrap"><span class="char">o</span></span><!--
+          --><span class="char-wrap"><span class="char">r</span></span>
+        </span>
+        <span class="headline-line headline-line--accent">
+          <span class="char-wrap"><span class="char">t</span></span><!--
+          --><span class="char-wrap"><span class="char">h</span></span><!--
+          --><span class="char-wrap"><span class="char">e</span></span><!--
+          --><span class="char-wrap"><span class="char">&nbsp;</span></span><!--
+          --><span class="char-wrap"><span class="char">i</span></span><!--
+          --><span class="char-wrap"><span class="char">n</span></span><!--
+          --><span class="char-wrap"><span class="char">s</span></span><!--
+          --><span class="char-wrap"><span class="char">i</span></span><!--
+          --><span class="char-wrap"><span class="char">d</span></span><!--
+          --><span class="char-wrap"><span class="char">e</span></span><!--
+          --><span class="char-wrap"><span class="char">.</span></span>
+        </span>
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="hero-subtitle">
+        Internal development.&nbsp;
+        <span class="hero-subtitle-accent">Maximum impact.</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="scroll-indicator" aria-hidden="true">
+    <span>scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<style>
+  /* ── Hero section base ── */
+  .hero {
+    background: var(--c-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 3;
+  }
+
+  .hero-content {
+    max-width: 900px;
+    padding-top: 2rem;
+  }
+
+  /* ── Animated blob background ── */
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    will-change: transform;
+  }
+
+  /* Violet blob — top left */
+  .blob-1 {
+    width: 55vw;
+    height: 55vh;
+    background: radial-gradient(ellipse, rgba(107, 33, 168, 0.45), transparent 70%);
+    top: -15%;
+    left: -10%;
+    animation: blob-drift-1 18s ease-in-out infinite;
+  }
+
+  /* Green blob — bottom right */
+  .blob-2 {
+    width: 45vw;
+    height: 45vh;
+    background: radial-gradient(ellipse, rgba(6, 78, 59, 0.3), transparent 70%);
+    bottom: -10%;
+    right: -5%;
+    animation: blob-drift-2 22s ease-in-out infinite;
+    animation-delay: -8s;
+  }
+
+  /* Bright violet — center right */
+  .blob-3 {
+    width: 35vw;
+    height: 35vh;
+    background: radial-gradient(ellipse, rgba(147, 51, 234, 0.2), transparent 70%);
+    top: 30%;
+    right: 10%;
+    animation: blob-drift-1 26s ease-in-out infinite reverse;
+    animation-delay: -14s;
+  }
+
+  /* Deep green — center left */
+  .blob-4 {
+    width: 30vw;
+    height: 40vh;
+    background: radial-gradient(ellipse, rgba(16, 185, 129, 0.1), transparent 70%);
+    bottom: 20%;
+    left: 15%;
+    animation: blob-drift-2 20s ease-in-out infinite;
+    animation-delay: -4s;
+  }
+
+  @keyframes blob-drift-1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33%       { transform: translate(30px, -40px) scale(1.06); }
+    66%       { transform: translate(-20px, 25px) scale(0.94); }
+  }
+
+  @keyframes blob-drift-2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33%       { transform: translate(-40px, 30px) scale(0.96); }
+    66%       { transform: translate(25px, -20px) scale(1.04); }
+  }
+
+  /* ── Scanlines ── */
+  .hero-scanlines {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 2px,
+      rgba(0, 0, 0, 0.06) 2px,
+      rgba(0, 0, 0, 0.06) 4px
+    );
+  }
+
+  /* ── Headline ── */
+  .hero-meta {
+    margin-bottom: 2rem;
+    display: block;
+  }
+
+  .hero-headline {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(3.5rem, 9vw, 8.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--c-white);
+    margin-bottom: 2.5rem;
+    display: block;
+  }
+
+  .headline-line {
+    display: block;
+  }
+
+  .headline-line--accent {
+    /* Gradient text on the second line */
+    background: linear-gradient(
+      135deg,
+      var(--c-white) 0%,
+      var(--c-violet-5) 50%,
+      var(--c-green-4) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ── Subtitle ── */
+  .hero-subtitle {
+    font-family: var(--font-mono);
+    font-size: clamp(0.875rem, 1.8vw, 1.125rem);
+    color: var(--c-muted);
+    letter-spacing: 0.04em;
+    margin-bottom: 0;
+  }
+
+  .hero-subtitle-accent {
+    color: var(--c-violet-5);
+  }
+
+  /* ── Scroll indicator positioning ── */
+  .scroll-indicator {
+    z-index: 4;
+  }
+</style>

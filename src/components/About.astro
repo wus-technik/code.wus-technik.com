@@ -1,0 +1,341 @@
+---
+/**
+ * About.astro — Section 4 (100vh)
+ *
+ * Left: large typographic statement
+ * Right: abstract animated geometric SVG (CSS + GSAP from sections.js)
+ */
+---
+
+<section class="snap-section about" id="about" data-section="3">
+  <div class="section-inner">
+    <div class="about-layout">
+
+      <!-- Left: typographic statement -->
+      <div class="about-left" data-about-left>
+        <span class="label label--accent about-label">/ 03</span>
+
+        <div class="about-statement">
+          <p class="statement-line">Internal&#8209;first.</p>
+          <p class="statement-line statement-line--muted">No external clients.</p>
+          <p class="statement-line statement-line--accent">Zero&nbsp;bullshit.</p>
+        </div>
+
+        <div class="about-body">
+          <p>
+            We exist to serve W&amp;S Technik's internal teams — not to grow an
+            agency, not to win awards. Every system we build is used by our own
+            colleagues. That changes everything about how we design, deploy, and
+            maintain software.
+          </p>
+          <p class="about-body-second">
+            Owned by people who use it. Operated by people who built it.
+            Trusted by the organisation that funds it.
+          </p>
+        </div>
+
+        <!-- Tags -->
+        <div class="about-tags">
+          <span class="tag">W&amp;S Gruppe</span>
+          <span class="tag">W&amp;S Technik GmbH</span>
+          <span class="tag tag--green">Internal Only</span>
+        </div>
+      </div>
+
+      <!-- Right: animated geometric SVG -->
+      <div class="about-right" data-about-right aria-hidden="true">
+        <div class="geo-wrap">
+          <svg
+            class="geo-svg"
+            viewBox="0 0 400 400"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <!-- Outer hexagon -->
+            <polygon
+              class="geo-hex geo-hex--outer"
+              points="200,30 354,115 354,285 200,370 46,285 46,115"
+              stroke="rgba(107,33,168,0.25)"
+              stroke-width="1"
+            />
+
+            <!-- Mid hexagon — rotated -->
+            <polygon
+              class="geo-hex geo-hex--mid"
+              points="200,65 322,132 322,268 200,335 78,268 78,132"
+              stroke="rgba(6,78,59,0.3)"
+              stroke-width="1"
+            />
+
+            <!-- Inner hexagon -->
+            <polygon
+              class="geo-hex geo-hex--inner"
+              points="200,110 288,160 288,240 200,290 112,240 112,160"
+              stroke="rgba(147,51,234,0.4)"
+              stroke-width="1"
+            />
+
+            <!-- Circles -->
+            <circle
+              class="geo-ring geo-ring--1"
+              cx="200" cy="200" r="150"
+              stroke="rgba(107,33,168,0.18)"
+              stroke-width="0.75"
+              stroke-dasharray="4 6"
+            />
+            <circle
+              class="geo-ring geo-ring--2"
+              cx="200" cy="200" r="100"
+              stroke="rgba(16,185,129,0.22)"
+              stroke-width="0.75"
+              stroke-dasharray="2 8"
+            />
+            <circle
+              class="geo-ring geo-ring--3"
+              cx="200" cy="200" r="50"
+              stroke="rgba(147,51,234,0.45)"
+              stroke-width="1"
+            />
+
+            <!-- Radial spokes (6 lines) -->
+            <g class="geo-spokes" stroke="rgba(255,255,255,0.06)" stroke-width="0.75">
+              <line x1="200" y1="30" x2="200" y2="370" />
+              <line x1="46" y1="115" x2="354" y2="285" />
+              <line x1="354" y1="115" x2="46" y2="285" />
+            </g>
+
+            <!-- Cross-hatch diagonals inside inner hex -->
+            <g stroke="rgba(147,51,234,0.12)" stroke-width="0.75">
+              <line x1="112" y1="160" x2="288" y2="240" />
+              <line x1="112" y1="240" x2="288" y2="160" />
+              <line x1="200" y1="110" x2="200" y2="290" />
+            </g>
+
+            <!-- Center node -->
+            <circle cx="200" cy="200" r="5"
+              fill="rgba(147,51,234,0.8)"
+              class="geo-center-dot"
+            />
+            <circle cx="200" cy="200" r="10"
+              stroke="rgba(147,51,234,0.4)"
+              stroke-width="1"
+              fill="none"
+              class="geo-center-ring"
+            />
+            <circle cx="200" cy="200" r="18"
+              stroke="rgba(107,33,168,0.2)"
+              stroke-width="1"
+              fill="none"
+              class="geo-center-ring-2"
+            />
+
+            <!-- Vertex accent dots at hex corners -->
+            <g class="geo-vertices" fill="rgba(16,185,129,0.5)">
+              <circle cx="200" cy="30" r="2.5"/>
+              <circle cx="354" cy="115" r="2.5"/>
+              <circle cx="354" cy="285" r="2.5"/>
+              <circle cx="200" cy="370" r="2.5"/>
+              <circle cx="46" cy="285" r="2.5"/>
+              <circle cx="46" cy="115" r="2.5"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    background: var(--c-bg);
+    display: flex;
+    align-items: center;
+  }
+
+  /* ── Two-column layout ── */
+  .about-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-xl);
+    align-items: center;
+    width: 100%;
+  }
+
+  @media (max-width: 900px) {
+    .about-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .about-right {
+      display: none;
+    }
+  }
+
+  /* ── Left: text ── */
+  .about-label {
+    display: block;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-statement {
+    margin-bottom: 2.5rem;
+  }
+
+  .statement-line {
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 4.5vw, 4rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    color: var(--c-white);
+    white-space: nowrap;
+  }
+
+  .statement-line--muted {
+    color: var(--c-dim);
+  }
+
+  .statement-line--accent {
+    background: linear-gradient(90deg, var(--c-violet-4), var(--c-green-4));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .about-body {
+    max-width: 480px;
+    margin-bottom: 2rem;
+  }
+
+  .about-body p {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    line-height: 1.9;
+    color: var(--c-muted);
+  }
+
+  .about-body-second {
+    margin-top: 1rem;
+    color: var(--c-muted);
+    font-style: italic;
+  }
+
+  /* ── Tags ── */
+  .about-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.375rem 0.875rem;
+    border: 1px solid var(--c-border-bright);
+    border-radius: 2px;
+    color: var(--c-muted);
+    background: rgba(255, 255, 255, 0.03);
+    white-space: nowrap;
+  }
+
+  .tag--green {
+    border-color: rgba(16, 185, 129, 0.25);
+    color: var(--c-green-4);
+    background: rgba(6, 78, 59, 0.1);
+  }
+
+  /* ── Right: SVG geo ── */
+  .about-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .geo-wrap {
+    width: min(380px, 45vw);
+    height: min(380px, 45vw);
+    position: relative;
+  }
+
+  .geo-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  /* ── Geometry animations ── */
+  .geo-hex--outer {
+    transform-origin: 200px 200px;
+    animation: hex-spin 40s linear infinite;
+  }
+
+  .geo-hex--mid {
+    transform-origin: 200px 200px;
+    animation: hex-spin 28s linear infinite reverse;
+  }
+
+  .geo-hex--inner {
+    transform-origin: 200px 200px;
+    animation: hex-spin 20s linear infinite;
+  }
+
+  .geo-ring--1 {
+    transform-origin: 200px 200px;
+    animation: hex-spin 60s linear infinite reverse;
+  }
+
+  .geo-ring--2 {
+    transform-origin: 200px 200px;
+    animation: hex-spin 35s linear infinite;
+  }
+
+  .geo-ring--3 {
+    transform-origin: 200px 200px;
+    animation: ring-pulse 3s ease-in-out infinite;
+  }
+
+  .geo-center-ring {
+    transform-origin: 200px 200px;
+    animation: ring-pulse 2.5s ease-in-out infinite;
+    animation-delay: -0.5s;
+  }
+
+  .geo-center-ring-2 {
+    transform-origin: 200px 200px;
+    animation: ring-pulse 3.5s ease-in-out infinite;
+    animation-delay: -1s;
+  }
+
+  .geo-spokes {
+    transform-origin: 200px 200px;
+    animation: hex-spin 80s linear infinite;
+  }
+
+  .geo-vertices circle {
+    animation: dot-pulse 2s ease-in-out infinite;
+  }
+
+  .geo-vertices circle:nth-child(2) { animation-delay: -0.33s; }
+  .geo-vertices circle:nth-child(3) { animation-delay: -0.66s; }
+  .geo-vertices circle:nth-child(4) { animation-delay: -1s; }
+  .geo-vertices circle:nth-child(5) { animation-delay: -1.33s; }
+  .geo-vertices circle:nth-child(6) { animation-delay: -1.66s; }
+
+  @keyframes hex-spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+  @keyframes ring-pulse {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50%       { opacity: 1;   transform: scale(1.06); }
+  }
+
+  @keyframes dot-pulse {
+    0%, 100% { opacity: 0.4; r: 2.5; }
+    50%       { opacity: 1;   r: 3.5; }
+  }
+</style>
