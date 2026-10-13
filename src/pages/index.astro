@@ -1,55 +1,7 @@
 ---
-/**
- * index.astro — Entry point
- *
- * Assembles all sections inside the page-wrapper that provides
- * the relative positioning context for the ConnectingThread SVG overlay.
- * All GSAP animations are imported from src/scripts/.
- */
-
-import Layout          from '../layouts/Layout.astro';
-import ConnectingThread from '../components/ConnectingThread.astro';
-import Hero            from '../components/Hero.astro';
-import Services        from '../components/Services.astro';
-import HowWeWork       from '../components/HowWeWork.astro';
-import About           from '../components/About.astro';
-import Footer          from '../components/Footer.astro';
-import BackToTop       from '../components/BackToTop.astro';
-import SectionNav      from '../components/SectionNav.astro';
+import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout>
-  <!--
-    page-wrapper: position relative so ConnectingThread SVG
-    (position absolute) covers the full stacked height of all sections.
-  -->
-  <div class="page-wrapper">
-
-    <!-- SVG thread overlay (behind all content, z-index: 2) -->
-    <ConnectingThread />
-
-    <!-- Sections in scroll-snap order -->
-    <Hero />
-    <Services />
-    <HowWeWork />
-    <About />
-    <Footer />
-
-  </div>
-
-  <SectionNav />
-  <BackToTop />
+  <main id="main">code.wus-technik.com</main>
 </Layout>
-
-<!--
-  Scripts are loaded as Astro bundled modules.
-  Order matters: hero first (page load animation),
-  then thread (needs DOM layout), then section reveals.
--->
-<script>
-  import '../scripts/hero.js';
-  import '../scripts/globe.js';
-  import '../scripts/thread.js';
-  import '../scripts/sections.js';
-  import '../scripts/scroll.js';
-</script>

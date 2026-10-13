@@ -11,10 +11,6 @@
     "check": "node scripts/check-dist.mjs"
   },
   "dependencies": {
-    "@fontsource/jetbrains-mono": "^5.1.0",
-    "@fontsource/roboto": "^5.2.10",
-    "@fontsource/syne": "^5.1.0",
-    "astro": "^4.15.0",
-    "gsap": "^3.12.5"
+    "astro": "^4.15.0"
   }
 }
