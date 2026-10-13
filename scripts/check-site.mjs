@@ -1,13 +1,13 @@
-// scripts/check-dist.mjs — assertions on the built page. Run after `npm run build`.
+// scripts/check-site.mjs — assertions on the static page in site/ and on the repo having no build step.
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 
-const file = 'dist/index.html';
+const file = 'site/index.html';
 if (!existsSync(file)) {
-  console.error(`FAIL: ${file} missing — run npm run build`);
+  console.error(`FAIL: ${file} missing`);
   process.exit(1);
 }
 const html = readFileSync(file, 'utf8');
-const cssDir = 'dist/_astro';
+const cssDir = 'site';
 const css = existsSync(cssDir)
   ? readdirSync(cssDir).filter(f => f.endsWith('.css')).map(f => readFileSync(`${cssDir}/${f}`, 'utf8')).join('\n')
   : '';
@@ -26,12 +26,12 @@ check(has('content="https://code.wus-technik.com/"') && has('property="og:url"')
 check(has('<title>W&amp;S Technik · Open source</title>') ||
       has('<title>W&S Technik · Open source</title>'), 'title');
 check(has('href="/favicon.svg"'), 'favicon.svg link');
-check(existsSync('dist/favicon.svg'), 'dist/favicon.svg exists');
+check(existsSync('site/favicon.svg'), 'site/favicon.svg exists');
 
 // Company logo (from wus-technik.com): inline in the sidebar brand, and as the favicon
 const LOGO_PATH = 'M295.9,73.59l-17.64,66.6';
 check(/<svg[^>]*class="brand-logo"[^>]*>[\s\S]*?M295\.9,73\.59l-17\.64,66\.6/.test(html), 'W&S logo inline in sidebar brand');
-check(existsSync('dist/favicon.svg') && readFileSync('dist/favicon.svg', 'utf8').includes(LOGO_PATH), 'favicon uses the W&S logo');
+check(existsSync('site/favicon.svg') && readFileSync('site/favicon.svg', 'utf8').includes(LOGO_PATH), 'favicon uses the W&S logo');
 
 // Theme bootstrap: inline (not bundled), guarded, sets class js
 const headPart = html.split('</head>')[0];
@@ -77,8 +77,8 @@ for (const [fg, bg] of [['success', 'success-bg'], ['primary', 'primary-light'],
 const img = html.match(/<img[^>]+claude-usage-tray\.png[^>]*>/)?.[0] ?? '';
 check(img && /alt="Claude Usage Tray popup[^"]+"/.test(img) && /width="339"/.test(img) && /height="341"/.test(img), 'screenshot img with alt and size');
 check(has('2 public projects') && />Public projects<\/span><span class="f-v">2 \(MIT\)/.test(html), 'project count is 2 (topbar and dev team card)');
-check(/<pre class="code"><code>services:\n  meshcentral-agent:\n/.test(html), 'meshcentral quick-start compose snippet with preserved line breaks');
-check(existsSync('dist/claude-usage-tray.png'), 'dist/claude-usage-tray.png exists');
+check(/<pre class="code"><code>services:\r?\n  meshcentral-agent:\r?\n/.test(html), 'meshcentral quick-start compose snippet with preserved line breaks');
+check(existsSync('site/claude-usage-tray.png'), 'site/claude-usage-tray.png exists');
 const dl = 'https://github.com/wus-technik/win_systray-claude-usage/releases/download/setup-stub/ClaudeUsageTraySetup.exe';
 const dlTag = html.match(new RegExp(`<a[^>]+href="${dl.replace(/[.\/]/g, '\\$&')}"[^>]*>`))?.[0] ?? '';
 check(dlTag && !dlTag.includes('target='), 'installer link, same tab');
@@ -99,9 +99,20 @@ check(!/v\d+\.\d+\.\d+/.test(html.replace(/<head>[\s\S]*<\/head>/, '')), 'no har
 const ext = [...html.matchAll(/<a[^>]+href="https?:\/\/[^"]+"[^>]*>/g)].map(m => m[0]).filter(a => !a.includes(dl));
 for (const a of ext) check(a.includes('target="_blank"') && a.includes('rel="noopener"'), `external link attrs: ${a}`);
 
+// No build step: the page is served as committed, with nothing to install or audit
+check(has('<script type="module" src="/nav.js"></script>'), 'nav.js loaded as a same-origin module');
+for (const f of ['site/nav.js', 'site/spy.js', 'site/.nojekyll']) check(existsSync(f), `${f} exists`);
+check(existsSync('site/CNAME') && readFileSync('site/CNAME', 'utf8').trim() === 'code.wus-technik.com', 'site/CNAME is code.wus-technik.com');
+for (const f of ['package-lock.json', 'astro.config.mjs', 'tsconfig.json', 'src', 'public']) check(!existsSync(f), `${f} is gone`);
+const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
+check(!pkg.dependencies && !pkg.devDependencies, 'package.json has no dependencies');
+const wf = readFileSync('.github/workflows/deploy.yml', 'utf8').replace(/^\s*#.*$/gm, '');
+check(!/setup-node|npm (ci|install|run build)|ubuntu-latest/.test(wf), 'workflow: no setup-node, no install/build, pinned runner');
+check(wf.includes('actions/checkout@v7') && /folder:\s*site\b/.test(wf), 'workflow: checkout@v7, deploys site/');
+
 if (failures.length) {
   for (const f of failures) console.error(`FAIL: ${f}`);
   console.error(`\n${failures.length} check(s) failed`);
   process.exit(1);
 }
-console.log('check-dist: all checks passed');
+console.log('check-site: all checks passed');

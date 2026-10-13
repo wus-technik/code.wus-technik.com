@@ -1,18 +1,12 @@
 {
   "name": "code-wus-technik-com",
+  "private": true,
   "type": "module",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro",
     "test": "node --test scripts/test-spy.mjs",
-    "check": "node scripts/check-dist.mjs",
-    "check:links": "node scripts/check-links.mjs"
-  },
-  "dependencies": {
-    "astro": "^4.15.0"
+    "check": "node scripts/check-site.mjs",
+    "check:links": "node scripts/check-links.mjs",
+    "preview": "node scripts/serve.mjs"
   }
 }

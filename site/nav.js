@@ -54,3 +54,6 @@ const onScroll = () => {
 window.addEventListener('scroll', onScroll, { passive: true });
 window.addEventListener('resize', onScroll);
 spy();
+
+// Footer year: the markup carries the year of the last edit; keep it current.
+document.querySelectorAll('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });

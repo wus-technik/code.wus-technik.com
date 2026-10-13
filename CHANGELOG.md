@@ -6,6 +6,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.3.1] — 2026-10-13
+
+### Changed
+
+- **No build step any more.** The page is now plain, hand-maintained HTML, CSS and two small
+  ES modules in `site/`, published as committed. The rendered page is unchanged.
+- Deploy workflow only checks out, runs the checks on the runner's own Node.js and publishes
+  `site/`: `actions/checkout@v7`, pinned `ubuntu-24.04` runner, no `setup-node`, no `npm ci`.
+- `scripts/check-dist.mjs` is now `scripts/check-site.mjs` and also asserts that no build
+  tooling, lockfile or dependency comes back. `npm run preview` serves `site/` with a small
+  built-in Node server.
+- The footer year is set by script (the markup keeps a fallback year).
+
+### Removed
+
+- Astro and every npm dependency (`package-lock.json`, `astro.config.mjs`, `tsconfig.json`,
+  `src/`, `public/`) — with nothing installed there is nothing for Dependabot to flag.
+
 ## [0.3.0] — 2026-10-13
 
 ### Changed
@@ -54,7 +72,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Gradient text on second hero headline line was clipped by `overflow:hidden` on `.char-wrap`; fixed by applying `background-clip:text` directly to each `.char` span instead of the parent
 
-[Unreleased]: https://github.com/wus-technik/code.wus-technik.com/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/wus-technik/code.wus-technik.com/compare/v0.3.1...HEAD
+[0.3.1]: https://github.com/wus-technik/code.wus-technik.com/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/wus-technik/code.wus-technik.com/compare/v0.2.1...v0.3.0
 [0.2.0]: https://github.com/wus-technik/code.wus-technik.com/compare/v0.1.0...v0.2.0
 

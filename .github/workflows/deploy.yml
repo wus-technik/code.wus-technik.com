@@ -1,12 +1,13 @@
 # ─────────────────────────────────────────────────────────
-# Deploy Astro site to GitHub Pages (gh-pages branch)
+# Deploy the static site to GitHub Pages (gh-pages branch)
 #
 # Triggered on push to main or manual workflow_dispatch.
-# Uses JamesIves/github-pages-deploy-action to push the
-# built `dist/` directory to the `gh-pages` branch.
+# There is no build: `site/` is published as committed, after
+# the checks in scripts/ pass. Nothing is installed — the
+# checks run on the Node.js that ships with the runner.
 #
-# Custom domain: code.wus-technik.com
-# The CNAME file is in public/ and is copied to dist/ by Astro.
+# GitHub Pages must be set to "Deploy from a branch: gh-pages /".
+# Custom domain: code.wus-technik.com (site/CNAME).
 # ─────────────────────────────────────────────────────────
 
 name: Deploy to GitHub Pages
@@ -21,38 +22,26 @@ permissions:
   contents: write
 
 jobs:
-  build-and-deploy:
-    name: Build & Deploy
-    runs-on: ubuntu-latest
+  check-and-deploy:
+    name: Check & Deploy
+    runs-on: ubuntu-24.04
 
     steps:
       # 1. Check out source
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
-      # 2. Set up Node.js with npm cache
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '24'
-          cache: 'npm'
+      # 2. Assertions on site/ and the scroll-spy unit tests
+      - name: Check site
+        run: |
+          node --version
+          node --test scripts/test-spy.mjs
+          node scripts/check-site.mjs
 
-      # 3. Install all dependencies (including GSAP, @fontsource/*)
-      - name: Install dependencies
-        run: npm ci
-
-      # 4. Build Astro static output into dist/
-      - name: Build Astro site
-        run: npm run build
-
-      # 5. Deploy dist/ to gh-pages branch
-      #    JamesIves/github-pages-deploy-action handles:
-      #    - creating the branch if it doesn't exist
-      #    - force-pushing the compiled output
-      #    - preserving CNAME for custom domain
+      # 3. Publish site/ to the gh-pages branch
       - name: Deploy to gh-pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: dist
-          clean:  true
+          folder: site
+          clean: true

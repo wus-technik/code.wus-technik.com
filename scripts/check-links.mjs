@@ -1,8 +1,8 @@
-// scripts/check-links.mjs — final HTTP status of every external link in dist/index.html.
+// scripts/check-links.mjs — final HTTP status of every external link in site/index.html.
 import { readFileSync } from 'node:fs';
 
 const KNOWN_PENDING = new Set(['https://www.wus-technik.com/datenschutz/code.wus-technik.com']);
-const html = readFileSync('dist/index.html', 'utf8');
+const html = readFileSync('site/index.html', 'utf8');
 const urls = [...new Set([...html.matchAll(/href="(https?:\/\/[^"]+)"/g)].map(m => m[1]))]
   .filter(u => !u.startsWith('https://code.wus-technik.com/'));
 

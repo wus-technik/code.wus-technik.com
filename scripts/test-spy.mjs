@@ -1,7 +1,7 @@
 // scripts/test-spy.mjs — unit tests for the scroll-spy section picker.
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { activeIndex } from '../src/scripts/spy.js';
+import { activeIndex } from '../site/spy.js';
 
 const view = { scrollY: 0, innerHeight: 900, scrollHeight: 2400, offset: 84 };
 
