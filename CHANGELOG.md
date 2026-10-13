@@ -54,7 +54,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Gradient text on second hero headline line was clipped by `overflow:hidden` on `.char-wrap`; fixed by applying `background-clip:text` directly to each `.char` span instead of the parent
 
-[Unreleased]: https://github.com/wus-technik/code.wus-technik.com/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/wus-technik/code.wus-technik.com/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/wus-technik/code.wus-technik.com/compare/v0.2.1...v0.3.0
 [0.2.0]: https://github.com/wus-technik/code.wus-technik.com/compare/v0.1.0...v0.2.0
 
 ## [0.1.0] — 2026-03-18
