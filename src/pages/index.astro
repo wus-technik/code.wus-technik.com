@@ -3,6 +3,25 @@ import Layout from '../layouts/Layout.astro';
 import Sidebar from '../components/Sidebar.astro';
 import Topbar from '../components/Topbar.astro';
 import Footer from '../components/Footer.astro';
+import Card from '../components/Card.astro';
+import Ext from '../components/Ext.astro';
+
+const svg = (p: string) => `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+const ic = {
+  building: svg('<path d="M4 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16M16 9h2a2 2 0 0 1 2 2v10M8 7h4M8 11h4M8 15h4M2 21h20"/>'),
+  users: svg('<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/>'),
+  gauge: svg('<path d="M12 14l4-4"/><path d="M3.3 19a10 10 0 1 1 17.4 0"/>'),
+  download: svg('<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>'),
+};
+
+const features = [
+  ['Two badge icons', 'Fill shows usage, colour shows severity, the digit names the window — 5 hours or 7 days.'],
+  ['Per-model caps', 'Weekly limits scoped to a model or surface — the cap that usually bites first.'],
+  ['Credit spend', 'Paid extra usage against your monthly limit, in your account’s currency.'],
+  ['Reset countdowns', '“Resets in 3h 58m” on hover and in the popup.'],
+  ['Pace marker & colours', 'A line shows where the clock is in the period; colour follows usage against the clock, not raw percent.'],
+  ['Platform status', 'A warning badge appears while status.claude.com reports anything but “All Systems Operational”.'],
+];
 ---
 
 <Layout>
@@ -12,9 +31,79 @@ import Footer from '../components/Footer.astro';
     <div class="main-col">
       <Topbar />
       <main class="view" id="main">
-        <section id="about"><h2>About</h2></section>
-        <section id="team"><h2>Team</h2></section>
-        <section id="claude-usage-tray"><h2>Claude Usage Tray</h2></section>
+
+        <Card id="about" title="W&S Technik GmbH" sub="Since 2007" tone="p">
+          <Fragment slot="icon" set:html={ic.building} />
+          <p class="lede">
+            W&amp;S Technik is a service provider for railway infrastructure: we maintain
+            signalling and safety systems, train specialist staff through the W&amp;S Academy
+            and build custom training installations — Technik, Consulting and Services from
+            one source.
+          </p>
+          <div class="fields">
+            <div class="field"><span class="f-l">Founded</span><span class="f-v">2007</span></div>
+            <div class="field"><span class="f-l">Employees</span><span class="f-v">100+</span></div>
+            <div class="field"><span class="f-l">Headquarters</span><span class="f-v">Castrop-Rauxel</span></div>
+            <div class="field"><span class="f-l">Branch</span><span class="f-v">Friedrichsdorf</span></div>
+            <div class="field"><span class="f-l">Field</span><span class="f-v">Railway infrastructure</span></div>
+          </div>
+          <div class="row">
+            <span class="chip pri">Technik</span>
+            <span class="chip pri">Consulting</span>
+            <span class="chip pri">Services</span>
+            <Ext class="row-link" href="https://www.wus-technik.com">wus-technik.com</Ext>
+          </div>
+        </Card>
+
+        <Card id="team" title="Dev team" sub="In-house software" tone="a">
+          <Fragment slot="icon" set:html={ic.users} />
+          <p class="lede">
+            A small in-house team that builds the software W&amp;S colleagues use every day —
+            internal platforms, automation and infrastructure. When a tool solves a problem
+            others have too, we publish it under an open licence.
+          </p>
+          <div class="fields">
+            <div class="field"><span class="f-l">GitHub</span><span class="f-v"><Ext href="https://github.com/wus-technik"><span class="mono">wus-technik</span></Ext></span></div>
+            <div class="field"><span class="f-l">Public projects</span><span class="f-v">1 (MIT)</span></div>
+            <div class="field"><span class="f-l">Focus</span><span class="f-v">Internal tools, DevOps, infrastructure</span></div>
+          </div>
+        </Card>
+
+        <Card id="claude-usage-tray" title="Claude Usage Tray" sub="Windows tray app" tone="s">
+          <Fragment slot="icon" set:html={ic.gauge} />
+          <div class="project">
+            <figure class="shot">
+              <img src="/claude-usage-tray.png" width="339" height="341"
+                alt="Claude Usage Tray popup showing the 5-hour and 7-day usage bars with reset countdowns, a per-model weekly cap and monthly credit spend" />
+            </figure>
+            <div class="project-body">
+              <p class="tagline">Your Claude limits, always visible — right next to the clock.</p>
+              <div class="row">
+                <span class="chip ok">MIT</span>
+                <span class="chip">Windows 10/11 x64</span>
+                <span class="chip">.NET 10</span>
+                <span class="chip info">No admin</span>
+                <span class="chip info">Auto-update</span>
+              </div>
+              <p>
+                Claude Code tells you that you hit a limit <em>after</em> you hit it. This sits in
+                your tray and tells you it’s coming — the rolling windows, the per-model weekly
+                cap that throttles first, and how much paid credit you’ve burned this month.
+              </p>
+              <div class="section-label">What you get</div>
+              <ul class="features">
+                {features.map(([t, d]) => <li><b>{t}</b><span>{d}</span></li>)}
+              </ul>
+              <div class="actions">
+                <a class="btn btn-primary" href="https://github.com/wus-technik/win_systray-claude-usage/releases/download/setup-stub/ClaudeUsageTraySetup.exe"><Fragment set:html={ic.download} />Download installer</a>
+                <Ext class="btn btn-ghost" href="https://github.com/wus-technik/win_systray-claude-usage">View on GitHub</Ext>
+                <Ext class="btn-link" href="https://github.com/wus-technik/win_systray-claude-usage/releases">All releases</Ext>
+              </div>
+              <p class="muted small">Per-user install, nothing written outside your profile. Polls Anthropic’s usage API every 5 minutes and falls back to Claude Code’s local cache.</p>
+            </div>
+          </div>
+        </Card>
+
       </main>
       <Footer />
     </div>
