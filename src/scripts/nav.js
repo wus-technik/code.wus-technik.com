@@ -1,5 +1,7 @@
 // nav.js — theme switch (Light / System / Dark) and scroll-spy for the sidebar.
 
+import { activeIndex } from './spy.js';
+
 const root = document.documentElement;
 const buttons = document.querySelectorAll('[data-theme-set]');
 
@@ -22,16 +24,33 @@ buttons.forEach(b => b.addEventListener('click', () => {
   applyTheme(choice);
 }));
 
-// Scroll-spy: highlight the nav item of the section crossing the upper middle of the viewport.
+// Scroll-spy: highlight the last section whose top has passed below the sticky bar.
 const links = new Map([...document.querySelectorAll('[data-spy]')].map(a => [a.getAttribute('href').slice(1), a]));
-const observer = new IntersectionObserver(entries => {
-  for (const e of entries) {
-    if (!e.isIntersecting) continue;
-    links.forEach((a, id) => {
-      const on = id === e.target.id;
-      a.classList.toggle('active', on);
-      if (on) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current');
-    });
-  }
-}, { rootMargin: '-35% 0px -60% 0px' });
-document.querySelectorAll('.view section[id]').forEach(s => observer.observe(s));
+const sections = [...document.querySelectorAll('.view section[id]')];
+
+function spy() {
+  if (!sections.length) return;
+  const offset = parseFloat(getComputedStyle(sections[0]).scrollMarginTop) + 16;
+  const i = activeIndex(sections.map(s => s.getBoundingClientRect().top), {
+    scrollY: window.scrollY,
+    innerHeight: window.innerHeight,
+    scrollHeight: document.documentElement.scrollHeight,
+    offset,
+  });
+  const current = sections[i]?.id;
+  links.forEach((a, id) => {
+    const on = id === current;
+    a.classList.toggle('active', on);
+    if (on) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current');
+  });
+}
+
+let queued = false;
+const onScroll = () => {
+  if (queued) return;
+  queued = true;
+  requestAnimationFrame(() => { queued = false; spy(); });
+};
+window.addEventListener('scroll', onScroll, { passive: true });
+window.addEventListener('resize', onScroll);
+spy();

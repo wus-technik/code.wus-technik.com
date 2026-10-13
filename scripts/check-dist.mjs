@@ -55,6 +55,19 @@ check(/class="[^"]*hidden-nojs/.test(html), 'theme switch hidden without JS');
 check(/html:not\(\.js\)\s*\.hidden-nojs/.test(allCss), 'CSS hides .hidden-nojs without js');
 check(!/(^|[},\s])(html|body)\s*\{[^}]*overflow:\s*hidden/.test(allCss), 'no overflow:hidden on html/body');
 
+// Contrast: light-theme pill text on its tint must reach WCAG AA (4.5:1) — first token match is the light :root.
+const token = n => allCss.match(new RegExp(`--${n}:\\s*(#[0-9a-f]{6})`, 'i'))?.[1];
+const lum = hex => {
+  const [r, g, b] = [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16) / 255)
+    .map(c => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4));
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+};
+const ratio = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((m, n) => n - m); return (x + 0.05) / (y + 0.05); };
+for (const [fg, bg] of [['success', 'success-bg'], ['primary', 'primary-light'], ['accent', 'accent-bg'], ['info', 'info-bg'], ['text-muted', 'bg']]) {
+  const [f, b] = [token(fg), token(bg)];
+  check(f && b && ratio(f, b) >= 4.5, `contrast --${fg} on --${bg} ≥ 4.5 (${f} on ${b}: ${f && b ? ratio(f, b).toFixed(2) : '?'})`);
+}
+
 // Content
 const img = html.match(/<img[^>]+claude-usage-tray\.png[^>]*>/)?.[0] ?? '';
 check(img && /alt="Claude Usage Tray popup[^"]+"/.test(img) && /width="339"/.test(img) && /height="341"/.test(img), 'screenshot img with alt and size');
