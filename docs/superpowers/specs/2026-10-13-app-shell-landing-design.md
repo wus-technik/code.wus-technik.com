@@ -130,7 +130,9 @@ No hard-coded version number.
 ### Footer
 
 "© {year} W&S Technik GmbH" · Imprint → `https://www.wus-technik.com/impressum/` ·
-Privacy → `https://www.wus-technik.com/datenschutz/`.
+Privacy → `https://www.wus-technik.com/datenschutz/code.wus-technik.com` (a
+subdomain-specific policy covering the GitHub Pages hosting; that page does not exist yet
+— as of 2026-10-13 it returns 404 and is created separately on wus-technik.com).
 
 ## Head / SEO
 
@@ -169,6 +171,8 @@ opens in the same tab.
    reviewed with the user.
 3. Every external link in the built HTML: `curl -sIL -o /dev/null -w '%{http_code}'`
    reports a **final** status of 200 (GitHub release links redirect first).
+   Known exception until it is published: the privacy URL (404 on 2026-10-13) — report it,
+   don't block on it.
 4. The built HTML contains no `noindex` and no third-party `src=`/stylesheet URLs.
 
 ## Out of scope
