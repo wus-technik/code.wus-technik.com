@@ -12,7 +12,30 @@ const ic = {
   users: svg('<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/>'),
   gauge: svg('<path d="M12 14l4-4"/><path d="M3.3 19a10 10 0 1 1 17.4 0"/>'),
   download: svg('<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>'),
+  box: svg('<path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/>'),
+  github: svg('<path d="M9 19c-4 1.5-4-2-6-2.5m12 5v-3.5a3 3 0 0 0-1-2.3c3-.3 6-1.5 6-6.5a5 5 0 0 0-1.4-3.5 4.6 4.6 0 0 0-.1-3.5s-1.1-.3-3.6 1.4a12.4 12.4 0 0 0-6.6 0C5.8 2.1 4.7 2.4 4.7 2.4a4.6 4.6 0 0 0-.1 3.5A5 5 0 0 0 3.2 9.4c0 5 3 6.2 6 6.5a3 3 0 0 0-1 2.3V22"/>'),
 };
+
+const meshFeatures = [
+  ['Nothing baked in', 'The agent comes from your own server’s installer, so it always matches the server it reports to.'],
+  ['One volume', '/meshagent holds the installation — later starts find it and skip the download.'],
+  ['Stable identity', 'Pin the MAC address and the device keeps its NodeID across restarts; the container warns if it moves.'],
+  ['Probe or slim', 'The probe adds ~25 network tools — dig, mtr, tcpdump, nmap — for MeshCentral’s remote terminal; slim is the agent alone.'],
+  ['Fails loudly', 'A bad URL, group ID or installer stops the container with a message naming the cause, instead of half-installing.'],
+  ['Two release tracks', ':stable moves only on a tagged release, :latest follows every build; both leave an immutable tag to pin.'],
+];
+
+const compose = `services:
+  meshcentral-agent:
+    image: ghcr.io/wus-technik/docker-meshcentral-agent:stable
+    restart: unless-stopped
+    hostname: meshagent-site01         # the device's name — set it once
+    mac_address: "02:57:53:03:01:01"   # pins the NodeID
+    volumes:
+      - ./meshagent-data:/meshagent
+    environment:
+      MESH_SERVER_URL: "https://your-meshcentral-server.com"
+      MESH_GROUP_ID: "your-group-id"   # write each $ as $$`;
 
 const features = [
   ['Two badge icons', 'Fill shows usage, colour shows severity, the digit names the window — 5 hours or 7 days.'],
@@ -64,7 +87,7 @@ const features = [
           </p>
           <div class="fields">
             <div class="field"><span class="f-l">GitHub</span><span class="f-v"><Ext href="https://github.com/wus-technik"><span class="mono">wus-technik</span></Ext></span></div>
-            <div class="field"><span class="f-l">Public projects</span><span class="f-v">1 (MIT)</span></div>
+            <div class="field"><span class="f-l">Public projects</span><span class="f-v">2 (MIT)</span></div>
             <div class="field"><span class="f-l">Focus</span><span class="f-v">Internal tools, DevOps, infrastructure</span></div>
           </div>
         </Card>
@@ -102,6 +125,37 @@ const features = [
               <p class="muted small">Per-user install, nothing written outside your profile. Polls Anthropic’s usage API every 5 minutes and falls back to Claude Code’s local cache.</p>
             </div>
           </div>
+        </Card>
+
+        <Card id="meshcentral-agent" title="MeshCentral Agent for Docker" sub="Container image" tone="i">
+          <Fragment slot="icon" set:html={ic.box} />
+          <p class="tagline">Put a container on your MeshCentral map — two variables and a volume.</p>
+          <div class="row">
+            <span class="chip ok">MIT</span>
+            <span class="chip">Docker</span>
+            <span class="chip">Debian 13</span>
+            <span class="chip info">Probe + slim</span>
+            <span class="chip info">GHCR</span>
+          </div>
+          <p class="lede">
+            MeshCentral hands you an install script meant for a host, not a container. This image
+            wraps it: point it at your server and a device group, mount one volume, and the agent
+            installs itself once and comes straight back up on every restart. The probe variant
+            brings a network toolkit, so a remote terminal on site is somewhere you can actually
+            diagnose from.
+          </p>
+          <div class="section-label">What you get</div>
+          <ul class="features wide">
+            {meshFeatures.map(([t, d]) => <li><b>{t}</b><span>{d}</span></li>)}
+          </ul>
+          <div class="section-label">Quick start</div>
+          <pre class="code"><code set:text={compose} /></pre>
+          <div class="actions">
+            <Ext class="btn btn-primary" href="https://github.com/wus-technik/docker-meshcentral-agent"><Fragment set:html={ic.github} />View on GitHub</Ext>
+            <Ext class="btn btn-ghost" href="https://github.com/wus-technik/docker-meshcentral-agent/pkgs/container/docker-meshcentral-agent">Container package</Ext>
+            <Ext class="btn-link" href="https://github.com/wus-technik/docker-meshcentral-agent/releases">All releases</Ext>
+          </div>
+          <p class="muted small">Not affiliated with MeshCentral. The agent itself is downloaded from your own server and carries its own licence.</p>
         </Card>
 
       </main>

@@ -161,3 +161,9 @@ html:not(.js) .hidden-nojs { display: none !important; }
   .shot { justify-self: center; max-width: 339px; }
   .card-b { font-size: 14.5px; }
 }
+
+/* ── Second project: info tone, quick-start code ── */
+.card-ic.i { background: var(--info-bg); color: var(--info); }
+.nav-group .nav-count { margin-left: 8px; letter-spacing: 0; text-transform: none; }
+.code { margin: 0; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface-3); color: var(--text); font-family: var(--mono); font-size: 12.5px; line-height: 1.55; overflow-x: auto; tab-size: 2; }
+.features.wide { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }

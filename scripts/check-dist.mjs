@@ -23,8 +23,8 @@ check(/<html[^>]*lang="en"/.test(html), 'html lang="en"');
 check(!/noindex/i.test(html), 'no noindex');
 check(has('<link rel="canonical" href="https://code.wus-technik.com/"'), 'canonical link');
 check(has('content="https://code.wus-technik.com/"') && has('property="og:url"'), 'og:url');
-check(has('<title>W&amp;S Technik · Open source — Claude Usage Tray</title>') ||
-      has('<title>W&S Technik · Open source — Claude Usage Tray</title>'), 'title');
+check(has('<title>W&amp;S Technik · Open source</title>') ||
+      has('<title>W&S Technik · Open source</title>'), 'title');
 check(has('href="/favicon.svg"'), 'favicon.svg link');
 check(existsSync('dist/favicon.svg'), 'dist/favicon.svg exists');
 
@@ -46,7 +46,7 @@ check(sheets.every(l => /href="\//.test(l)), 'same-origin stylesheets only');
 check(!/fonts\.googleapis|shields\.io|avatars\.githubusercontent|gsap/i.test(html), 'no third-party assets');
 
 // Structure
-for (const id of ['about', 'team', 'claude-usage-tray']) {
+for (const id of ['about', 'team', 'claude-usage-tray', 'meshcentral-agent']) {
   check(has(`id="${id}"`), `section #${id}`);
   check(has(`href="#${id}"`), `nav link to #${id}`);
 }
@@ -76,6 +76,8 @@ for (const [fg, bg] of [['success', 'success-bg'], ['primary', 'primary-light'],
 // Content
 const img = html.match(/<img[^>]+claude-usage-tray\.png[^>]*>/)?.[0] ?? '';
 check(img && /alt="Claude Usage Tray popup[^"]+"/.test(img) && /width="339"/.test(img) && /height="341"/.test(img), 'screenshot img with alt and size');
+check(has('2 public projects') && />Public projects<\/span><span class="f-v">2 \(MIT\)/.test(html), 'project count is 2 (topbar and dev team card)');
+check(/<pre class="code"><code>services:\n  meshcentral-agent:\n/.test(html), 'meshcentral quick-start compose snippet with preserved line breaks');
 check(existsSync('dist/claude-usage-tray.png'), 'dist/claude-usage-tray.png exists');
 const dl = 'https://github.com/wus-technik/win_systray-claude-usage/releases/download/setup-stub/ClaudeUsageTraySetup.exe';
 const dlTag = html.match(new RegExp(`<a[^>]+href="${dl.replace(/[.\/]/g, '\\$&')}"[^>]*>`))?.[0] ?? '';
@@ -85,6 +87,9 @@ for (const u of [
   'https://www.wus-technik.com',
   'https://github.com/wus-technik/win_systray-claude-usage',
   'https://github.com/wus-technik/win_systray-claude-usage/releases',
+  'https://github.com/wus-technik/docker-meshcentral-agent',
+  'https://github.com/wus-technik/docker-meshcentral-agent/pkgs/container/docker-meshcentral-agent',
+  'https://github.com/wus-technik/docker-meshcentral-agent/releases',
   'https://www.wus-technik.com/impressum/',
   'https://www.wus-technik.com/datenschutz/code.wus-technik.com',
 ]) check(has(`href="${u}"`), `link ${u}`);
