@@ -6,6 +6,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.3.0] — 2026-10-13
+
+### Changed
+
+- **Complete redesign** as a single English page in the app-shell style of the W&S
+  Claude mockups: dark sidebar navigation, topbar, cards on a grey canvas, light/dark/system
+  theme switch. Content: W&S Technik GmbH, the in-house dev team, and the first public
+  project, [Claude Usage Tray](https://github.com/wus-technik/win_systray-claude-usage).
+- The site is now indexable (removed `noindex, nofollow`), with canonical URL and OG tags.
+
+### Removed
+
+- GSAP animations, globe, PCB circuit trace, section navigation, custom scroll controller,
+  back-to-top button, and the self-hosted fonts (`gsap`, `@fontsource/*`). The previous
+  site is preserved on branch `test-01`.
+
 ## [0.2.0] — 2026-03-18
 
 ### Added

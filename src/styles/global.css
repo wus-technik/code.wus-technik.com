@@ -66,7 +66,7 @@ html:not(.js) .hidden-nojs { display: none !important; }
 .brand { display: flex; align-items: center; gap: 10px; padding: 4px 8px 16px; color: inherit; text-decoration: none; }
 .brand-mark { width: 30px; height: 30px; border-radius: 8px; background: var(--primary); color: var(--on-primary); display: grid; place-items: center; flex-shrink: 0; font-size: 10.5px; font-weight: 800; }
 .brand-txt { display: flex; flex-direction: column; min-width: 0; }
-.brand-name { font-weight: 800; font-size: 14px; letter-spacing: -.2px; }
+.brand-name { font-weight: 800; font-size: 13px; letter-spacing: -.2px; white-space: nowrap; }
 .brand-sub { font-size: 11px; color: var(--nav-muted); line-height: 1.2; }
 .side-nav { display: flex; flex-direction: column; gap: 2px; }
 .nav-group { font-size: 10.5px; text-transform: uppercase; letter-spacing: .7px; color: var(--nav-muted); padding: 14px 10px 4px; font-weight: 700; }
