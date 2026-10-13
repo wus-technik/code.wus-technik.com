@@ -1,5 +1,6 @@
 ---
 import Ext from './Ext.astro';
+import logo from '../assets/wus-logo.svg?raw';
 const icon = {
   building: '<path d="M4 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16M16 9h2a2 2 0 0 1 2 2v10M8 7h4M8 11h4M8 15h4M2 21h20"/>',
   users: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/>',
@@ -15,7 +16,7 @@ const svg = (p: string) => `<svg width="16" height="16" viewBox="0 0 24 24" fill
 
 <aside class="side">
   <a class="brand" href="#main">
-    <span class="brand-mark" aria-hidden="true">W&amp;S</span>
+    <Fragment set:html={logo} />
     <span class="brand-txt">
       <span class="brand-name">code.wus-technik.com</span>
       <span class="brand-sub">Software at W&amp;S Technik</span>

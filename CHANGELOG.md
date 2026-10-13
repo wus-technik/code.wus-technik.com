@@ -15,6 +15,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   theme switch. Content: W&S Technik GmbH, the in-house dev team, and the first public
   project, [Claude Usage Tray](https://github.com/wus-technik/win_systray-claude-usage).
 - The site is now indexable (removed `noindex, nofollow`), with canonical URL and OG tags.
+- Sidebar brand and favicon use the official W&S logo (from wus-technik.com), inlined
+  as SVG so it takes the sidebar's text colour.
 
 ### Removed
 

@@ -28,6 +28,11 @@ check(has('<title>W&amp;S Technik · Open source — Claude Usage Tray</title>')
 check(has('href="/favicon.svg"'), 'favicon.svg link');
 check(existsSync('dist/favicon.svg'), 'dist/favicon.svg exists');
 
+// Company logo (from wus-technik.com): inline in the sidebar brand, and as the favicon
+const LOGO_PATH = 'M295.9,73.59l-17.64,66.6';
+check(/<svg[^>]*class="brand-logo"[^>]*>[\s\S]*?M295\.9,73\.59l-17\.64,66\.6/.test(html), 'W&S logo inline in sidebar brand');
+check(existsSync('dist/favicon.svg') && readFileSync('dist/favicon.svg', 'utf8').includes(LOGO_PATH), 'favicon uses the W&S logo');
+
 // Theme bootstrap: inline (not bundled), guarded, sets class js
 const headPart = html.split('</head>')[0];
 const inline = [...headPart.matchAll(/<script(?![^>]*src=)[^>]*>([\s\S]*?)<\/script>/g)].map(m => m[1]).join('\n');
