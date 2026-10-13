@@ -1,4 +1,18 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>W&amp;S Technik · Open source</title><meta name="description" content="Open-source tools from the in-house dev team of W&#38;S Technik GmbH: Claude Usage Tray puts your Claude limits in the Windows tray, and a MeshCentral agent image puts any Docker host on your MeshCentral map."><link rel="canonical" href="https://code.wus-technik.com/"><meta property="og:title" content="W&#38;S Technik · Open source"><meta property="og:description" content="Open-source tools from the in-house dev team of W&#38;S Technik GmbH: Claude Usage Tray puts your Claude limits in the Windows tray, and a MeshCentral agent image puts any Docker host on your MeshCentral map."><meta property="og:type" content="website"><meta property="og:url" content="https://code.wus-technik.com/"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><!-- Runs before first paint (is:inline: Astro must not bundle/defer it). --><script>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W&amp;S Technik · Open source</title>
+    <meta name="description" content="Open-source tools from the in-house dev team of W&amp;S Technik GmbH: Claude Usage Tray puts your Claude limits in the Windows tray, and a MeshCentral agent image puts any Docker host on your MeshCentral map.">
+    <link rel="canonical" href="https://code.wus-technik.com/">
+    <meta property="og:title" content="W&amp;S Technik · Open source">
+    <meta property="og:description" content="Open-source tools from the in-house dev team of W&amp;S Technik GmbH: Claude Usage Tray puts your Claude limits in the Windows tray, and a MeshCentral agent image puts any Docker host on your MeshCentral map.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://code.wus-technik.com/">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <!-- Theme bootstrap: inline so it runs before first paint. -->
+    <script>
       (function () {
         var d = document.documentElement;
         d.classList.add('js');
@@ -7,35 +21,205 @@
           if (t === 'light' || t === 'dark') d.setAttribute('data-theme', t);
         } catch (e) {}
       })();
-    </script><link rel="stylesheet" href="/_astro/index.BkhNmwHX.css"><script type="module">function y(e,{scrollY:t,innerHeight:o,scrollHeight:r,offset:i}){if(!e.length)return-1;if(o+t>=r-2)return e.length-1;let n=0;return e.forEach((f,g)=>{f<=i&&(n=g)}),n}const c=document.documentElement,a=document.querySelectorAll("[data-theme-set]");function u(e){e==="light"||e==="dark"?c.setAttribute("data-theme",e):c.removeAttribute("data-theme"),a.forEach(t=>t.setAttribute("aria-pressed",String(t.dataset.themeSet===e)))}let d="system";try{d=localStorage.getItem("theme")||"system"}catch{}u(d);a.forEach(e=>e.addEventListener("click",()=>{const t=e.dataset.themeSet;try{t==="system"?localStorage.removeItem("theme"):localStorage.setItem("theme",t)}catch{}u(t)}));const p=new Map([...document.querySelectorAll("[data-spy]")].map(e=>[e.getAttribute("href").slice(1),e])),s=[...document.querySelectorAll(".view section[id]")];function m(){if(!s.length)return;const e=parseFloat(getComputedStyle(s[0]).scrollMarginTop)+16,t=y(s.map(r=>r.getBoundingClientRect().top),{scrollY:window.scrollY,innerHeight:window.innerHeight,scrollHeight:document.documentElement.scrollHeight,offset:e}),o=s[t]?.id;p.forEach((r,i)=>{const n=i===o;r.classList.toggle("active",n),n?r.setAttribute("aria-current","location"):r.removeAttribute("aria-current")})}let l=!1;const h=()=>{l||(l=!0,requestAnimationFrame(()=>{l=!1,m()}))};window.addEventListener("scroll",h,{passive:!0});window.addEventListener("resize",h);m();
-</script></head> <body>  <a class="skip" href="#main">Skip to content</a> <div class="app"> <aside class="side"> <a class="brand" href="#main"> <svg class="brand-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 353.19 220.73" fill="currentColor" aria-hidden="true" focusable="false"><g><g><g><g><path d="M295.9,73.59l-17.64,66.6c-3.32,15.14-17.05,26.15-32.49,26.15H0l4.06-18.46h241.71c6.89,0,12.98-4.92,14.46-11.63l16.78-62.66h18.89Z"/><path d="M324.45,73.59l-18.87,72.08c-6.15,27.94-31.38,48.24-60,48.24H0l4.06-18.46h241.52c20,0,37.66-14.21,41.97-33.78l17.94-68.08h18.95Z"/><path d="M353.19,73.59l-20.65,80.26c-8.55,38.77-43.57,66.89-83.26,66.89H.17l4.06-18.46h245.04c31.08,0,58.52-22.03,65.23-52.43l19.79-76.26h18.89Z"/></g><g><path d="M84.7,127.73c-.84,0-1.46-.24-1.85-.71-.4-.48-.57-1.05-.51-1.74l1.34-51.02c0-.47.18-.89.55-1.26.37-.37.82-.55,1.34-.55h8.06c.74,0,1.26.16,1.58.47.31.32.45.79.4,1.42l-1.03,32.7,10.66-20.3c.26-.42.63-.87,1.11-1.34.48-.47,1.11-.71,1.9-.71h4.97c.84,0,1.39.24,1.66.71.26.48.42.92.48,1.34l2.21,20.69,12.95-33.33c.42-1.11,1.31-1.66,2.68-1.66h8.61c.63,0,1.04.21,1.22.63.18.42.17.87-.04,1.34l-19.27,50.87c-.26.68-.7,1.26-1.3,1.74-.6.47-1.33.71-2.17.71h-6.56c-.9,0-1.51-.22-1.86-.67-.34-.45-.57-.91-.67-1.38l-3.79-24.41-12.87,24.41c-.26.47-.66.94-1.19,1.38s-1.21.67-2.05.67h-6.56Z"/><path d="M153.97,128.52c-3.95,0-7.27-.65-9.95-1.93-2.69-1.29-4.58-3.15-5.69-5.57-1.11-2.42-1.32-5.26-.63-8.53.53-2.32,1.44-4.37,2.73-6.16,1.29-1.79,2.9-3.41,4.82-4.86,1.92-1.45,4.09-2.78,6.52-3.99-1.69-2.31-2.78-4.42-3.28-6.32-.5-1.9-.54-3.84-.12-5.84.53-2.42,1.63-4.66,3.32-6.71,1.69-2.05,3.9-3.72,6.64-5.02,2.74-1.29,5.9-1.93,9.48-1.93,3.37,0,6.11.62,8.21,1.86,2.11,1.24,3.58,2.88,4.42,4.94.84,2.05,1,4.29.48,6.71-.48,2.16-1.37,4.09-2.69,5.8-1.32,1.71-2.98,3.25-4.97,4.62-2,1.37-4.21,2.68-6.64,3.95l8.21,10.35c.68-.9,1.59-2.13,2.73-3.71,1.13-1.58,2.28-3.61,3.44-6.08.31-.84.95-1.26,1.9-1.26h6.87c.48,0,.82.14,1.03.43.21.29.26.67.16,1.15-.21,1-.68,2.17-1.42,3.51-.74,1.34-1.62,2.75-2.64,4.23-1.03,1.48-2.13,2.92-3.32,4.35-1.19,1.42-2.38,2.74-3.59,3.95l6.79,8.69c.31.37.42.76.31,1.19-.05.42-.25.76-.59,1.03s-.75.4-1.22.4h-9.08c-.53,0-.94-.09-1.22-.28-.29-.18-.54-.36-.75-.51l-3.08-3.79c-2.47,1.74-5.12,3.07-7.94,3.99-2.82.92-5.88,1.38-9.2,1.38ZM155.94,119.43c1.68,0,3.37-.28,5.05-.83,1.69-.55,3.32-1.46,4.9-2.72l-9.24-11.45c-1.79.9-3.41,1.96-4.86,3.2-1.45,1.24-2.36,2.73-2.73,4.46-.31,1.53-.18,2.84.4,3.95.58,1.11,1.45,1.95,2.61,2.53,1.16.58,2.45.87,3.87.87ZM161.87,92.98c1.47-.74,2.82-1.46,4.03-2.17s2.24-1.5,3.08-2.37c.84-.87,1.39-1.85,1.66-2.96.31-1.63.04-2.92-.83-3.87-.87-.95-2.15-1.42-3.83-1.42-1.53,0-2.98.48-4.35,1.42s-2.21,2.24-2.53,3.87c-.21,1.05-.12,2.15.28,3.28.39,1.13,1.22,2.54,2.49,4.23Z"/><path d="M212.25,128.52c-5.06,0-9.2-.73-12.44-2.17-3.24-1.45-5.56-3.37-6.95-5.77-1.39-2.39-1.88-4.94-1.46-7.62.05-.42.25-.8.59-1.14s.75-.51,1.22-.51h8.61c.68,0,1.19.15,1.5.43.31.29.6.65.87,1.07.16.9.57,1.76,1.22,2.61s1.62,1.54,2.88,2.09c1.27.55,2.87.83,4.82.83,3.47,0,6.21-.55,8.21-1.66,2-1.11,3.21-2.61,3.63-4.5.31-1.37.11-2.47-.63-3.32-.74-.84-2.04-1.6-3.91-2.29-1.87-.68-4.33-1.42-7.39-2.21-3.79-.84-6.9-2.02-9.32-3.52-2.42-1.5-4.09-3.38-5.02-5.65-.92-2.27-1.04-4.98-.35-8.14,1-4.74,3.53-8.49,7.58-11.25,4.06-2.76,9.32-4.15,15.8-4.15,3.37,0,6.33.47,8.89,1.42s4.69,2.19,6.4,3.71c1.71,1.53,2.93,3.16,3.67,4.9.74,1.74.97,3.42.71,5.06-.05.42-.25.8-.59,1.14-.34.34-.75.51-1.22.51h-9.01c-.53,0-.97-.1-1.34-.31-.37-.21-.66-.58-.87-1.11,0-1.37-.67-2.57-2.02-3.59-1.34-1.03-3.15-1.54-5.41-1.54-2.58,0-4.77.48-6.56,1.42s-2.92,2.39-3.4,4.34c-.26,1.27-.09,2.33.51,3.2.6.87,1.74,1.63,3.4,2.29,1.66.66,3.93,1.39,6.83,2.17,4.43.95,7.93,2.16,10.51,3.63s4.33,3.32,5.25,5.53c.92,2.21,1.04,4.9.36,8.06-1.11,5.26-3.84,9.25-8.21,11.97-4.37,2.71-10.16,4.07-17.38,4.07Z"/></g></g><g><path d="M63.91,122.94H14.78c-5.5,0-9.89-4.46-9.89-9.89v-58.14c0-2.63,1.04-5.13,2.93-7.02L48,7.7c1.83-1.83,4.28-2.87,6.9-2.87h73.29c2.63,0,5.13,1.04,7.02,2.93l40.13,40.13c1.89,1.89,2.93,4.34,2.93,7.02l-.05,9.01h4.89l.05-9.01c0-3.97-1.53-7.7-4.34-10.44L138.7,4.34c-2.81-2.81-6.54-4.34-10.44-4.34H54.97c-3.91,0-7.57,1.53-10.38,4.28L4.34,44.46c-2.81,2.81-4.34,6.54-4.34,10.44v58.14c0,8.18,6.66,14.78,14.78,14.78h48.07l1.07-4.89Z"/><circle cx="47.94" cy="42.69" r="14.6"/><circle cx="135.16" cy="42.69" r="14.6"/><path d="M96.93,28.1c-8.06,0-14.6,6.53-14.6,14.6s6.54,14.6,14.6,14.6,14.6-6.54,14.6-14.6-6.54-14.6-14.6-14.6ZM96.93,52.51c-5.42,0-9.81-4.39-9.81-9.81s4.39-9.81,9.81-9.81,9.81,4.39,9.81,9.81-4.39,9.81-9.81,9.81Z"/><path d="M47.94,77.57c-8.06,0-14.6,6.53-14.6,14.6s6.54,14.6,14.6,14.6,14.6-6.54,14.6-14.6-6.53-14.6-14.6-14.6ZM47.94,102.04c-5.45,0-9.87-4.42-9.87-9.87s4.42-9.87,9.87-9.87,9.87,4.42,9.87,9.87-4.42,9.87-9.87,9.87Z"/></g></g></g></svg>
- <span class="brand-txt"> <span class="brand-name">code.wus-technik.com</span> <span class="brand-sub">Software at W&amp;S Technik</span> </span> </a> <nav class="side-nav" aria-label="Page"> <div class="nav-group">Overview</div> <a class="nav-item" href="#about" data-spy><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16M16 9h2a2 2 0 0 1 2 2v10M8 7h4M8 11h4M8 15h4M2 21h20"/></svg><span>About W&amp;S</span></a> <a class="nav-item" href="#team" data-spy><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg><span>Dev team</span></a> <div class="nav-group">Projects<span class="nav-count" aria-hidden="true">2</span></div> <a class="nav-item" href="#claude-usage-tray" data-spy><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 14l4-4"/><path d="M3.3 19a10 10 0 1 1 17.4 0"/></svg><span>Claude Usage Tray</span></a> <a class="nav-item" href="#meshcentral-agent" data-spy><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg><span>MeshCentral Agent</span></a> <div class="nav-group nav-ext">Links</div> <a href="https://github.com/wus-technik" class="nav-item nav-ext" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-4 1.5-4-2-6-2.5m12 5v-3.5a3 3 0 0 0-1-2.3c3-.3 6-1.5 6-6.5a5 5 0 0 0-1.4-3.5 4.6 4.6 0 0 0-.1-3.5s-1.1-.3-3.6 1.4a12.4 12.4 0 0 0-6.6 0C5.8 2.1 4.7 2.4 4.7 2.4a4.6 4.6 0 0 0-.1 3.5A5 5 0 0 0 3.2 9.4c0 5 3 6.2 6 6.5a3 3 0 0 0-1 2.3V22"/></svg>GitHub<span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in new tab)</span></a> <a href="https://www.wus-technik.com" class="nav-item nav-ext" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>wus-technik.com<span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in new tab)</span></a> </nav> <div class="theme hidden-nojs" role="group" aria-label="Theme"> <button type="button" data-theme-set="light" aria-pressed="false" aria-label="Light theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><span class="theme-lbl">Light</span></button> <button type="button" data-theme-set="system" aria-pressed="true" aria-label="System theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg><span class="theme-lbl">System</span></button> <button type="button" data-theme-set="dark" aria-pressed="false" aria-label="Dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><span class="theme-lbl">Dark</span></button> </div> </aside> <div class="main-col"> <header class="topbar"> <h1 class="topbar-title">Open source from W&amp;S Technik</h1> <p class="topbar-sub">Tools our in-house dev team built for itself — and now shares.</p> <span class="chip acc topbar-right">2 public projects</span> </header> <main class="view" id="main"> <section id="about" class="card" aria-labelledby="about-h"> <div class="card-h"> <span class="card-ic p" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16M16 9h2a2 2 0 0 1 2 2v10M8 7h4M8 11h4M8 15h4M2 21h20"/></svg></span> <h2 id="about-h">W&amp;S Technik GmbH</h2> <span class="sub">Since 2007</span> </div> <div class="card-b">  <p class="lede">
-W&amp;S Technik is a service provider for railway infrastructure: we maintain
-            signalling and safety systems, train specialist staff through the W&amp;S Academy
-            and build custom training installations — Technik, Consulting and Services from
-            one source.
-</p> <div class="fields"> <div class="field"><span class="f-l">Founded</span><span class="f-v">2007</span></div> <div class="field"><span class="f-l">Employees</span><span class="f-v">100+</span></div> <div class="field"><span class="f-l">Headquarters</span><span class="f-v">Castrop-Rauxel</span></div> <div class="field"><span class="f-l">Branch</span><span class="f-v">Friedrichsdorf</span></div> <div class="field"><span class="f-l">Field</span><span class="f-v">Railway infrastructure</span></div> </div> <div class="row"> <span class="chip pri">Technik</span> <span class="chip pri">Consulting</span> <span class="chip pri">Services</span> <a href="https://www.wus-technik.com" class="row-link" target="_blank" rel="noopener">wus-technik.com<span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in new tab)</span></a> </div> </div> </section> <section id="team" class="card" aria-labelledby="team-h"> <div class="card-h"> <span class="card-ic a" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg></span> <h2 id="team-h">Dev team</h2> <span class="sub">In-house software</span> </div> <div class="card-b">  <p class="lede">
-A small in-house team that builds the software W&amp;S colleagues use every day —
-            internal platforms, automation and infrastructure. When a tool solves a problem
-            others have too, we publish it under an open licence.
-</p> <div class="fields"> <div class="field"><span class="f-l">GitHub</span><span class="f-v"><a href="https://github.com/wus-technik" target="_blank" rel="noopener"><span class="mono">wus-technik</span><span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in new tab)</span></a></span></div> <div class="field"><span class="f-l">Public projects</span><span class="f-v">2 (MIT)</span></div> <div class="field"><span class="f-l">Focus</span><span class="f-v">Internal tools, DevOps, infrastructure</span></div> </div> </div> </section> <section id="claude-usage-tray" class="card" aria-labelledby="claude-usage-tray-h"> <div class="card-h"> <span class="card-ic s" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 14l4-4"/><path d="M3.3 19a10 10 0 1 1 17.4 0"/></svg></span> <h2 id="claude-usage-tray-h">Claude Usage Tray</h2> <span class="sub">Windows tray app</span> </div> <div class="card-b">  <div class="project"> <figure class="shot"> <img src="/claude-usage-tray.png" width="339" height="341" alt="Claude Usage Tray popup showing the 5-hour and 7-day usage bars with reset countdowns, a per-model weekly cap and monthly credit spend"> </figure> <div class="project-body"> <p class="tagline">Your Claude limits, always visible — right next to the clock.</p> <div class="row"> <span class="chip ok">MIT</span> <span class="chip">Windows 10/11 x64</span> <span class="chip">.NET 10</span> <span class="chip info">No admin</span> <span class="chip info">Auto-update</span> </div> <p>
-Claude Code tells you that you hit a limit <em>after</em> you hit it. This sits in
-                your tray and tells you it’s coming — the rolling windows, the per-model weekly
-                cap that throttles first, and how much paid credit you’ve burned this month.
-</p> <div class="section-label">What you get</div> <ul class="features"> <li><b>Two badge icons</b><span>Fill shows usage, colour shows severity, the digit names the window — 5 hours or 7 days.</span></li><li><b>Per-model caps</b><span>Weekly limits scoped to a model or surface — the cap that usually bites first.</span></li><li><b>Credit spend</b><span>Paid extra usage against your monthly limit, in your account’s currency.</span></li><li><b>Reset countdowns</b><span>“Resets in 3h 58m” on hover and in the popup.</span></li><li><b>Pace marker &amp; colours</b><span>A line shows where the clock is in the period; colour follows usage against the clock, not raw percent.</span></li><li><b>Platform status</b><span>A warning badge appears while status.claude.com reports anything but “All Systems Operational”.</span></li> </ul> <div class="actions"> <a class="btn btn-primary" href="https://github.com/wus-technik/win_systray-claude-usage/releases/download/setup-stub/ClaudeUsageTraySetup.exe"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Download installer</a> <a href="https://github.com/wus-technik/win_systray-claude-usage" class="btn btn-ghost" target="_blank" rel="noopener">View on GitHub<span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in new tab)</span></a> <a href="https://github.com/wus-technik/win_systray-claude-usage/releases" class="btn-link" target="_blank" rel="noopener">All releases<span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in new tab)</span></a> </div> <p class="muted small">Per-user install, nothing written outside your profile. Polls Anthropic’s usage API every 5 minutes and falls back to Claude Code’s local cache.</p> </div> </div> </div> </section> <section id="meshcentral-agent" class="card" aria-labelledby="meshcentral-agent-h"> <div class="card-h"> <span class="card-ic i" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg></span> <h2 id="meshcentral-agent-h">MeshCentral Agent for Docker</h2> <span class="sub">Container image</span> </div> <div class="card-b">  <p class="tagline">Put a container on your MeshCentral map — two variables and a volume.</p> <div class="row"> <span class="chip ok">MIT</span> <span class="chip">Docker</span> <span class="chip">Debian 13</span> <span class="chip info">Probe + slim</span> <span class="chip info">GHCR</span> </div> <p class="lede">
-MeshCentral hands you an install script meant for a host, not a container. This image
-            wraps it: point it at your server and a device group, mount one volume, and the agent
-            installs itself once and comes straight back up on every restart. The probe variant
-            brings a network toolkit, so a remote terminal on site is somewhere you can actually
-            diagnose from.
-</p> <div class="section-label">What you get</div> <ul class="features wide"> <li><b>Nothing baked in</b><span>The agent comes from your own server’s installer, so it always matches the server it reports to.</span></li><li><b>One volume</b><span>/meshagent holds the installation — later starts find it and skip the download.</span></li><li><b>Stable identity</b><span>Pin the MAC address and the device keeps its NodeID across restarts; the container warns if it moves.</span></li><li><b>Probe or slim</b><span>The probe adds ~25 network tools — dig, mtr, tcpdump, nmap — for MeshCentral’s remote terminal; slim is the agent alone.</span></li><li><b>Fails loudly</b><span>A bad URL, group ID or installer stops the container with a message naming the cause, instead of half-installing.</span></li><li><b>Two release tracks</b><span>:stable moves only on a tagged release, :latest follows every build; both leave an immutable tag to pin.</span></li> </ul> <div class="section-label">Quick start</div> <pre class="code"><code>services:
+    </script>
+    <link rel="stylesheet" href="/styles.css">
+    <script type="module" src="/nav.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="app">
+
+      <aside class="side">
+        <a class="brand" href="#main">
+          <svg class="brand-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 353.19 220.73" fill="currentColor" aria-hidden="true" focusable="false"><g><g><g><g><path d="M295.9,73.59l-17.64,66.6c-3.32,15.14-17.05,26.15-32.49,26.15H0l4.06-18.46h241.71c6.89,0,12.98-4.92,14.46-11.63l16.78-62.66h18.89Z"/><path d="M324.45,73.59l-18.87,72.08c-6.15,27.94-31.38,48.24-60,48.24H0l4.06-18.46h241.52c20,0,37.66-14.21,41.97-33.78l17.94-68.08h18.95Z"/><path d="M353.19,73.59l-20.65,80.26c-8.55,38.77-43.57,66.89-83.26,66.89H.17l4.06-18.46h245.04c31.08,0,58.52-22.03,65.23-52.43l19.79-76.26h18.89Z"/></g><g><path d="M84.7,127.73c-.84,0-1.46-.24-1.85-.71-.4-.48-.57-1.05-.51-1.74l1.34-51.02c0-.47.18-.89.55-1.26.37-.37.82-.55,1.34-.55h8.06c.74,0,1.26.16,1.58.47.31.32.45.79.4,1.42l-1.03,32.7,10.66-20.3c.26-.42.63-.87,1.11-1.34.48-.47,1.11-.71,1.9-.71h4.97c.84,0,1.39.24,1.66.71.26.48.42.92.48,1.34l2.21,20.69,12.95-33.33c.42-1.11,1.31-1.66,2.68-1.66h8.61c.63,0,1.04.21,1.22.63.18.42.17.87-.04,1.34l-19.27,50.87c-.26.68-.7,1.26-1.3,1.74-.6.47-1.33.71-2.17.71h-6.56c-.9,0-1.51-.22-1.86-.67-.34-.45-.57-.91-.67-1.38l-3.79-24.41-12.87,24.41c-.26.47-.66.94-1.19,1.38s-1.21.67-2.05.67h-6.56Z"/><path d="M153.97,128.52c-3.95,0-7.27-.65-9.95-1.93-2.69-1.29-4.58-3.15-5.69-5.57-1.11-2.42-1.32-5.26-.63-8.53.53-2.32,1.44-4.37,2.73-6.16,1.29-1.79,2.9-3.41,4.82-4.86,1.92-1.45,4.09-2.78,6.52-3.99-1.69-2.31-2.78-4.42-3.28-6.32-.5-1.9-.54-3.84-.12-5.84.53-2.42,1.63-4.66,3.32-6.71,1.69-2.05,3.9-3.72,6.64-5.02,2.74-1.29,5.9-1.93,9.48-1.93,3.37,0,6.11.62,8.21,1.86,2.11,1.24,3.58,2.88,4.42,4.94.84,2.05,1,4.29.48,6.71-.48,2.16-1.37,4.09-2.69,5.8-1.32,1.71-2.98,3.25-4.97,4.62-2,1.37-4.21,2.68-6.64,3.95l8.21,10.35c.68-.9,1.59-2.13,2.73-3.71,1.13-1.58,2.28-3.61,3.44-6.08.31-.84.95-1.26,1.9-1.26h6.87c.48,0,.82.14,1.03.43.21.29.26.67.16,1.15-.21,1-.68,2.17-1.42,3.51-.74,1.34-1.62,2.75-2.64,4.23-1.03,1.48-2.13,2.92-3.32,4.35-1.19,1.42-2.38,2.74-3.59,3.95l6.79,8.69c.31.37.42.76.31,1.19-.05.42-.25.76-.59,1.03s-.75.4-1.22.4h-9.08c-.53,0-.94-.09-1.22-.28-.29-.18-.54-.36-.75-.51l-3.08-3.79c-2.47,1.74-5.12,3.07-7.94,3.99-2.82.92-5.88,1.38-9.2,1.38ZM155.94,119.43c1.68,0,3.37-.28,5.05-.83,1.69-.55,3.32-1.46,4.9-2.72l-9.24-11.45c-1.79.9-3.41,1.96-4.86,3.2-1.45,1.24-2.36,2.73-2.73,4.46-.31,1.53-.18,2.84.4,3.95.58,1.11,1.45,1.95,2.61,2.53,1.16.58,2.45.87,3.87.87ZM161.87,92.98c1.47-.74,2.82-1.46,4.03-2.17s2.24-1.5,3.08-2.37c.84-.87,1.39-1.85,1.66-2.96.31-1.63.04-2.92-.83-3.87-.87-.95-2.15-1.42-3.83-1.42-1.53,0-2.98.48-4.35,1.42s-2.21,2.24-2.53,3.87c-.21,1.05-.12,2.15.28,3.28.39,1.13,1.22,2.54,2.49,4.23Z"/><path d="M212.25,128.52c-5.06,0-9.2-.73-12.44-2.17-3.24-1.45-5.56-3.37-6.95-5.77-1.39-2.39-1.88-4.94-1.46-7.62.05-.42.25-.8.59-1.14s.75-.51,1.22-.51h8.61c.68,0,1.19.15,1.5.43.31.29.6.65.87,1.07.16.9.57,1.76,1.22,2.61s1.62,1.54,2.88,2.09c1.27.55,2.87.83,4.82.83,3.47,0,6.21-.55,8.21-1.66,2-1.11,3.21-2.61,3.63-4.5.31-1.37.11-2.47-.63-3.32-.74-.84-2.04-1.6-3.91-2.29-1.87-.68-4.33-1.42-7.39-2.21-3.79-.84-6.9-2.02-9.32-3.52-2.42-1.5-4.09-3.38-5.02-5.65-.92-2.27-1.04-4.98-.35-8.14,1-4.74,3.53-8.49,7.58-11.25,4.06-2.76,9.32-4.15,15.8-4.15,3.37,0,6.33.47,8.89,1.42s4.69,2.19,6.4,3.71c1.71,1.53,2.93,3.16,3.67,4.9.74,1.74.97,3.42.71,5.06-.05.42-.25.8-.59,1.14-.34.34-.75.51-1.22.51h-9.01c-.53,0-.97-.1-1.34-.31-.37-.21-.66-.58-.87-1.11,0-1.37-.67-2.57-2.02-3.59-1.34-1.03-3.15-1.54-5.41-1.54-2.58,0-4.77.48-6.56,1.42s-2.92,2.39-3.4,4.34c-.26,1.27-.09,2.33.51,3.2.6.87,1.74,1.63,3.4,2.29,1.66.66,3.93,1.39,6.83,2.17,4.43.95,7.93,2.16,10.51,3.63s4.33,3.32,5.25,5.53c.92,2.21,1.04,4.9.36,8.06-1.11,5.26-3.84,9.25-8.21,11.97-4.37,2.71-10.16,4.07-17.38,4.07Z"/></g></g><g><path d="M63.91,122.94H14.78c-5.5,0-9.89-4.46-9.89-9.89v-58.14c0-2.63,1.04-5.13,2.93-7.02L48,7.7c1.83-1.83,4.28-2.87,6.9-2.87h73.29c2.63,0,5.13,1.04,7.02,2.93l40.13,40.13c1.89,1.89,2.93,4.34,2.93,7.02l-.05,9.01h4.89l.05-9.01c0-3.97-1.53-7.7-4.34-10.44L138.7,4.34c-2.81-2.81-6.54-4.34-10.44-4.34H54.97c-3.91,0-7.57,1.53-10.38,4.28L4.34,44.46c-2.81,2.81-4.34,6.54-4.34,10.44v58.14c0,8.18,6.66,14.78,14.78,14.78h48.07l1.07-4.89Z"/><circle cx="47.94" cy="42.69" r="14.6"/><circle cx="135.16" cy="42.69" r="14.6"/><path d="M96.93,28.1c-8.06,0-14.6,6.53-14.6,14.6s6.54,14.6,14.6,14.6,14.6-6.54,14.6-14.6-6.54-14.6-14.6-14.6ZM96.93,52.51c-5.42,0-9.81-4.39-9.81-9.81s4.39-9.81,9.81-9.81,9.81,4.39,9.81,9.81-4.39,9.81-9.81,9.81Z"/><path d="M47.94,77.57c-8.06,0-14.6,6.53-14.6,14.6s6.54,14.6,14.6,14.6,14.6-6.54,14.6-14.6-6.53-14.6-14.6-14.6ZM47.94,102.04c-5.45,0-9.87-4.42-9.87-9.87s4.42-9.87,9.87-9.87,9.87,4.42,9.87,9.87-4.42,9.87-9.87,9.87Z"/></g></g></g></svg>
+          <span class="brand-txt">
+            <span class="brand-name">code.wus-technik.com</span>
+            <span class="brand-sub">Software at W&amp;S Technik</span>
+          </span>
+        </a>
+
+        <nav class="side-nav" aria-label="Page">
+          <div class="nav-group">Overview</div>
+          <a class="nav-item" href="#about" data-spy><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16M16 9h2a2 2 0 0 1 2 2v10M8 7h4M8 11h4M8 15h4M2 21h20"/></svg><span>About W&amp;S</span></a>
+          <a class="nav-item" href="#team" data-spy><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg><span>Dev team</span></a>
+          <div class="nav-group">Projects<span class="nav-count" aria-hidden="true">2</span></div>
+          <a class="nav-item" href="#claude-usage-tray" data-spy><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 14l4-4"/><path d="M3.3 19a10 10 0 1 1 17.4 0"/></svg><span>Claude Usage Tray</span></a>
+          <a class="nav-item" href="#meshcentral-agent" data-spy><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg><span>MeshCentral Agent</span></a>
+          <div class="nav-group nav-ext">Links</div>
+          <a href="https://github.com/wus-technik" class="nav-item nav-ext" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-4 1.5-4-2-6-2.5m12 5v-3.5a3 3 0 0 0-1-2.3c3-.3 6-1.5 6-6.5a5 5 0 0 0-1.4-3.5 4.6 4.6 0 0 0-.1-3.5s-1.1-.3-3.6 1.4a12.4 12.4 0 0 0-6.6 0C5.8 2.1 4.7 2.4 4.7 2.4a4.6 4.6 0 0 0-.1 3.5A5 5 0 0 0 3.2 9.4c0 5 3 6.2 6 6.5a3 3 0 0 0-1 2.3V22"/></svg>GitHub<span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in new tab)</span></a>
+          <a href="https://www.wus-technik.com" class="nav-item nav-ext" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>wus-technik.com<span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in new tab)</span></a>
+        </nav>
+
+        <div class="theme hidden-nojs" role="group" aria-label="Theme">
+          <button type="button" data-theme-set="light" aria-pressed="false" aria-label="Light theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><span class="theme-lbl">Light</span></button>
+          <button type="button" data-theme-set="system" aria-pressed="true" aria-label="System theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg><span class="theme-lbl">System</span></button>
+          <button type="button" data-theme-set="dark" aria-pressed="false" aria-label="Dark theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><span class="theme-lbl">Dark</span></button>
+        </div>
+      </aside>
+
+      <div class="main-col">
+
+        <header class="topbar">
+          <h1 class="topbar-title">Open source from W&amp;S Technik</h1>
+          <p class="topbar-sub">Tools our in-house dev team built for itself — and now shares.</p>
+          <span class="chip acc topbar-right">2 public projects</span>
+        </header>
+
+        <main class="view" id="main">
+
+          <section id="about" class="card" aria-labelledby="about-h">
+            <div class="card-h">
+              <span class="card-ic p" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16M16 9h2a2 2 0 0 1 2 2v10M8 7h4M8 11h4M8 15h4M2 21h20"/></svg></span>
+              <h2 id="about-h">W&amp;S Technik GmbH</h2>
+              <span class="sub">Since 2007</span>
+            </div>
+            <div class="card-b">
+              <p class="lede">
+                W&amp;S Technik is a service provider for railway infrastructure: we maintain
+                signalling and safety systems, train specialist staff through the W&amp;S Academy
+                and build custom training installations — Technik, Consulting and Services from
+                one source.
+              </p>
+              <div class="fields">
+                <div class="field"><span class="f-l">Founded</span><span class="f-v">2007</span></div>
+                <div class="field"><span class="f-l">Employees</span><span class="f-v">100+</span></div>
+                <div class="field"><span class="f-l">Headquarters</span><span class="f-v">Castrop-Rauxel</span></div>
+                <div class="field"><span class="f-l">Branch</span><span class="f-v">Friedrichsdorf</span></div>
+                <div class="field"><span class="f-l">Field</span><span class="f-v">Railway infrastructure</span></div>
+              </div>
+              <div class="row">
+                <span class="chip pri">Technik</span>
+                <span class="chip pri">Consulting</span>
+                <span class="chip pri">Services</span>
+                <a href="https://www.wus-technik.com" class="row-link" target="_blank" rel="noopener">wus-technik.com<span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in new tab)</span></a>
+              </div>
+            </div>
+          </section>
+
+          <section id="team" class="card" aria-labelledby="team-h">
+            <div class="card-h">
+              <span class="card-ic a" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg></span>
+              <h2 id="team-h">Dev team</h2>
+              <span class="sub">In-house software</span>
+            </div>
+            <div class="card-b">
+              <p class="lede">
+                A small in-house team that builds the software W&amp;S colleagues use every day —
+                internal platforms, automation and infrastructure. When a tool solves a problem
+                others have too, we publish it under an open licence.
+              </p>
+              <div class="fields">
+                <div class="field"><span class="f-l">GitHub</span><span class="f-v"><a href="https://github.com/wus-technik" target="_blank" rel="noopener"><span class="mono">wus-technik</span><span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in new tab)</span></a></span></div>
+                <div class="field"><span class="f-l">Public projects</span><span class="f-v">2 (MIT)</span></div>
+                <div class="field"><span class="f-l">Focus</span><span class="f-v">Internal tools, DevOps, infrastructure</span></div>
+              </div>
+            </div>
+          </section>
+
+          <section id="claude-usage-tray" class="card" aria-labelledby="claude-usage-tray-h">
+            <div class="card-h">
+              <span class="card-ic s" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 14l4-4"/><path d="M3.3 19a10 10 0 1 1 17.4 0"/></svg></span>
+              <h2 id="claude-usage-tray-h">Claude Usage Tray</h2>
+              <span class="sub">Windows tray app</span>
+            </div>
+            <div class="card-b">
+              <div class="project">
+                <figure class="shot">
+                  <img src="/claude-usage-tray.png" width="339" height="341" alt="Claude Usage Tray popup showing the 5-hour and 7-day usage bars with reset countdowns, a per-model weekly cap and monthly credit spend">
+                </figure>
+                <div class="project-body">
+                  <p class="tagline">Your Claude limits, always visible — right next to the clock.</p>
+                  <div class="row">
+                    <span class="chip ok">MIT</span>
+                    <span class="chip">Windows 10/11 x64</span>
+                    <span class="chip">.NET 10</span>
+                    <span class="chip info">No admin</span>
+                    <span class="chip info">Auto-update</span>
+                  </div>
+                  <p>
+                    Claude Code tells you that you hit a limit <em>after</em> you hit it. This sits in
+                    your tray and tells you it’s coming — the rolling windows, the per-model weekly
+                    cap that throttles first, and how much paid credit you’ve burned this month.
+                  </p>
+                  <div class="section-label">What you get</div>
+                  <ul class="features">
+                    <li><b>Two badge icons</b><span>Fill shows usage, colour shows severity, the digit names the window — 5 hours or 7 days.</span></li>
+                    <li><b>Per-model caps</b><span>Weekly limits scoped to a model or surface — the cap that usually bites first.</span></li>
+                    <li><b>Credit spend</b><span>Paid extra usage against your monthly limit, in your account’s currency.</span></li>
+                    <li><b>Reset countdowns</b><span>“Resets in 3h 58m” on hover and in the popup.</span></li>
+                    <li><b>Pace marker &amp; colours</b><span>A line shows where the clock is in the period; colour follows usage against the clock, not raw percent.</span></li>
+                    <li><b>Platform status</b><span>A warning badge appears while status.claude.com reports anything but “All Systems Operational”.</span></li>
+                  </ul>
+                  <div class="actions">
+                    <a class="btn btn-primary" href="https://github.com/wus-technik/win_systray-claude-usage/releases/download/setup-stub/ClaudeUsageTraySetup.exe"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Download installer</a>
+                    <a href="https://github.com/wus-technik/win_systray-claude-usage" class="btn btn-ghost" target="_blank" rel="noopener">View on GitHub<span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in new tab)</span></a>
+                    <a href="https://github.com/wus-technik/win_systray-claude-usage/releases" class="btn-link" target="_blank" rel="noopener">All releases<span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in new tab)</span></a>
+                  </div>
+                  <p class="muted small">Per-user install, nothing written outside your profile. Polls Anthropic’s usage API every 5 minutes and falls back to Claude Code’s local cache.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="meshcentral-agent" class="card" aria-labelledby="meshcentral-agent-h">
+            <div class="card-h">
+              <span class="card-ic i" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg></span>
+              <h2 id="meshcentral-agent-h">MeshCentral Agent for Docker</h2>
+              <span class="sub">Container image</span>
+            </div>
+            <div class="card-b">
+              <p class="tagline">Put a container on your MeshCentral map — two variables and a volume.</p>
+              <div class="row">
+                <span class="chip ok">MIT</span>
+                <span class="chip">Docker</span>
+                <span class="chip">Debian 13</span>
+                <span class="chip info">Probe + slim</span>
+                <span class="chip info">GHCR</span>
+              </div>
+              <p class="lede">
+                MeshCentral hands you an install script meant for a host, not a container. This image
+                wraps it: point it at your server and a device group, mount one volume, and the agent
+                installs itself once and comes straight back up on every restart. The probe variant
+                brings a network toolkit, so a remote terminal on site is somewhere you can actually
+                diagnose from.
+              </p>
+              <div class="section-label">What you get</div>
+              <ul class="features wide">
+                <li><b>Nothing baked in</b><span>The agent comes from your own server’s installer, so it always matches the server it reports to.</span></li>
+                <li><b>One volume</b><span>/meshagent holds the installation — later starts find it and skip the download.</span></li>
+                <li><b>Stable identity</b><span>Pin the MAC address and the device keeps its NodeID across restarts; the container warns if it moves.</span></li>
+                <li><b>Probe or slim</b><span>The probe adds ~25 network tools — dig, mtr, tcpdump, nmap — for MeshCentral’s remote terminal; slim is the agent alone.</span></li>
+                <li><b>Fails loudly</b><span>A bad URL, group ID or installer stops the container with a message naming the cause, instead of half-installing.</span></li>
+                <li><b>Two release tracks</b><span>:stable moves only on a tagged release, :latest follows every build; both leave an immutable tag to pin.</span></li>
+              </ul>
+              <div class="section-label">Quick start</div>
+              <pre class="code"><code>services:
   meshcentral-agent:
     image: ghcr.io/wus-technik/docker-meshcentral-agent:stable
     restart: unless-stopped
-    hostname: meshagent-site01         # the device&#39;s name — set it once
-    mac_address: &quot;02:57:53:03:01:01&quot;   # pins the NodeID
+    hostname: meshagent-site01         # the device's name — set it once
+    mac_address: "02:57:53:03:01:01"   # pins the NodeID
     volumes:
       - ./meshagent-data:/meshagent
     environment:
-      MESH_SERVER_URL: &quot;https://your-meshcentral-server.com&quot;
-      MESH_GROUP_ID: &quot;your-group-id&quot;   # write each $ as $$</code></pre> <div class="actions"> <a href="https://github.com/wus-technik/docker-meshcentral-agent" class="btn btn-primary" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4 1.5-4-2-6-2.5m12 5v-3.5a3 3 0 0 0-1-2.3c3-.3 6-1.5 6-6.5a5 5 0 0 0-1.4-3.5 4.6 4.6 0 0 0-.1-3.5s-1.1-.3-3.6 1.4a12.4 12.4 0 0 0-6.6 0C5.8 2.1 4.7 2.4 4.7 2.4a4.6 4.6 0 0 0-.1 3.5A5 5 0 0 0 3.2 9.4c0 5 3 6.2 6 6.5a3 3 0 0 0-1 2.3V22"/></svg>View on GitHub<span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in new tab)</span></a> <a href="https://github.com/wus-technik/docker-meshcentral-agent/pkgs/container/docker-meshcentral-agent" class="btn btn-ghost" target="_blank" rel="noopener">Container package<span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in new tab)</span></a> <a href="https://github.com/wus-technik/docker-meshcentral-agent/releases" class="btn-link" target="_blank" rel="noopener">All releases<span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in new tab)</span></a> </div> <p class="muted small">Not affiliated with MeshCentral. The agent itself is downloaded from your own server and carries its own licence.</p> </div> </section> </main> <footer class="foot"> <span>© 2026 W&amp;S Technik GmbH</span> <a href="https://www.wus-technik.com/impressum/" target="_blank" rel="noopener">Imprint<span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in new tab)</span></a> <a href="https://www.wus-technik.com/datenschutz/code.wus-technik.com" target="_blank" rel="noopener">Privacy<span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in new tab)</span></a> </footer> </div> </div>  </body></html> 
+      MESH_SERVER_URL: "https://your-meshcentral-server.com"
+      MESH_GROUP_ID: "your-group-id"   # write each $ as $$</code></pre>
+              <div class="actions">
+                <a href="https://github.com/wus-technik/docker-meshcentral-agent" class="btn btn-primary" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4 1.5-4-2-6-2.5m12 5v-3.5a3 3 0 0 0-1-2.3c3-.3 6-1.5 6-6.5a5 5 0 0 0-1.4-3.5 4.6 4.6 0 0 0-.1-3.5s-1.1-.3-3.6 1.4a12.4 12.4 0 0 0-6.6 0C5.8 2.1 4.7 2.4 4.7 2.4a4.6 4.6 0 0 0-.1 3.5A5 5 0 0 0 3.2 9.4c0 5 3 6.2 6 6.5a3 3 0 0 0-1 2.3V22"/></svg>View on GitHub<span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in new tab)</span></a>
+                <a href="https://github.com/wus-technik/docker-meshcentral-agent/pkgs/container/docker-meshcentral-agent" class="btn btn-ghost" target="_blank" rel="noopener">Container package<span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in new tab)</span></a>
+                <a href="https://github.com/wus-technik/docker-meshcentral-agent/releases" class="btn-link" target="_blank" rel="noopener">All releases<span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in new tab)</span></a>
+              </div>
+              <p class="muted small">Not affiliated with MeshCentral. The agent itself is downloaded from your own server and carries its own licence.</p>
+            </div>
+          </section>
+        </main>
+
+        <footer class="foot">
+          <span>© <span data-year>2026</span> W&amp;S Technik GmbH</span>
+          <a href="https://www.wus-technik.com/impressum/" target="_blank" rel="noopener">Imprint<span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in new tab)</span></a>
+          <a href="https://www.wus-technik.com/datenschutz/code.wus-technik.com" target="_blank" rel="noopener">Privacy<span aria-hidden="true"> ↗</span><span class="sr-only"> (opens in new tab)</span></a>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>
